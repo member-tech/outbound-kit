@@ -1,0 +1,1381 @@
+<title>아웃바운드 키트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ── CUBIG Home design tokens (assets/css/variables.css, 2026-07-08 스냅샷) ── */
+:root{
+  color-scheme: only light;
+  --c-bg-white:#ffffff; --c-bg-light:#fafaf9; --c-bg-light-alt:#f3f2f0; --c-bg-dark:#1c1c1c;
+  --c-text-white:#fcfbf8; --c-text-dark:#1c1c1c; --c-text-heading:#1c1c1c;
+  --c-text-strong:rgba(28,28,28,0.83); --c-text-body:rgba(28,28,28,0.82);
+  --c-text-muted:#5f5f5d; --c-text-subtle:rgba(28,28,28,0.5); --c-text-faint:rgba(28,28,28,0.4);
+  --c-accent-violet:#8A77E0; --c-accent-violet-strong:#6f5cd6; --c-accent-violet-text:#6F50CC;
+  --c-accent-green:#00c950; --c-accent-pink:#ff266a; --c-ok-text:#0a8f3c;
+  --c-border-light:rgba(28,28,28,0.08); --c-border-subtle:rgba(28,28,28,0.06);
+  --c-border-interactive:rgba(28,28,28,0.4); --c-chip-bg:rgba(28,28,28,0.04);
+  --font-primary:'Pretendard Variable','Manrope','Noto Sans KR','Apple SD Gothic Neo',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:'JetBrains Mono','Courier New',monospace;
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-pill:9999px; --container:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--c-bg-white); color:var(--c-text-dark);
+  font-family:var(--font-primary); font-weight:400; font-size:16px; line-height:1.68;
+  letter-spacing:-0.01em; word-break:keep-all;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+.wrap{max-width:var(--container); margin:0 auto; padding:0 32px}
+a{color:var(--c-accent-violet-text); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--c-accent-violet-strong); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.eyebrow{font-family:var(--font-mono); font-size:11px; font-weight:500; text-transform:uppercase;
+  letter-spacing:.12em; color:var(--c-accent-violet-text); display:block}
+
+header.mast{padding:60px 0 30px}
+.mast h1{font-size:48px; font-weight:700; letter-spacing:-1.2px; line-height:1.12; margin:12px 0 16px}
+.mast p.dek{font-size:18px; color:var(--c-text-muted); max-width:660px; line-height:1.6}
+.mast .src{margin-top:22px; font-family:var(--font-mono); font-size:12px; color:var(--c-text-subtle);
+  display:flex; flex-wrap:wrap; gap:4px 26px}
+.mast .src b{color:var(--c-text-strong); font-weight:600}
+
+.tabbar{position:sticky; top:0; z-index:200; background:rgba(255,255,255,.9);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--c-border-light)}
+.tabbar .wrap{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none}
+.tabbar .wrap::-webkit-scrollbar{display:none}
+.tab{font-family:var(--font-primary); font-size:14.5px; font-weight:500; letter-spacing:-0.01em;
+  color:var(--c-text-subtle); background:transparent; border:0; border-bottom:2px solid transparent;
+  padding:16px 13px 14px; cursor:pointer; white-space:nowrap; transition:color .18s ease, border-color .18s ease}
+.tab:hover{color:var(--c-text-dark)}
+.tab[aria-selected="true"]{color:var(--c-text-heading); font-weight:700; border-bottom-color:var(--c-accent-violet)}
+.tab .tn{font-family:var(--font-mono); font-size:11px; color:var(--c-text-faint); margin-right:6px}
+.tab[aria-selected="true"] .tn{color:var(--c-accent-violet-text)}
+.tab.aside{color:var(--c-text-faint); font-size:13px}
+.tabgap{flex:1 1 auto; min-width:16px}
+
+.panelwrap{padding:52px 0 88px}
+[role="tabpanel"][hidden]{display:none!important}
+section.block + section.block{margin-top:56px; padding-top:48px; border-top:1px solid var(--c-border-light)}
+h2{font-size:34px; font-weight:600; letter-spacing:-0.9px; line-height:1.22; margin-bottom:10px}
+h3{font-size:22px; font-weight:700; letter-spacing:-0.3px; line-height:1.3; margin:44px 0 12px}
+h4{font-size:17px; font-weight:700; letter-spacing:-0.2px; margin:30px 0 10px}
+p{font-size:16px; color:var(--c-text-body); line-height:1.68; max-width:680px; margin-bottom:14px}
+p.lead{font-size:18px; color:var(--c-text-muted); max-width:660px; line-height:1.6; margin-bottom:30px}
+ul,ol{margin:0 0 16px; padding-left:22px; max-width:680px}
+li{margin-bottom:7px; color:var(--c-text-body); line-height:1.68}
+strong{font-weight:700; color:var(--c-text-heading)}
+code{font-family:var(--font-mono); font-size:.9em; background:var(--c-chip-bg); padding:2px 6px; border-radius:var(--r-xs)}
+
+/* journey */
+figure.journey{margin:26px 0 10px; max-width:none}
+figure.journey svg{display:block; width:100%; height:auto; color:var(--c-text-heading)}
+figure.journey figcaption{margin-top:14px; font-size:13.5px; color:var(--c-text-muted); line-height:1.6; max-width:680px}
+.jbox{fill:#fff; stroke:currentColor; stroke-opacity:.16; stroke-width:1}
+.jbox-key{fill:var(--c-bg-light-alt); stroke-opacity:.22}
+.jt{font-family:var(--font-primary); font-size:16px; font-weight:700; fill:var(--c-text-heading); letter-spacing:-0.2px}
+.jd{font-family:var(--font-mono); font-size:12px; fill:var(--c-text-subtle); letter-spacing:.02em}
+.jlane{font-family:var(--font-mono); font-size:12px; font-weight:600; fill:var(--c-accent-violet-text); letter-spacing:.1em}
+.jline{stroke:currentColor; stroke-opacity:.3; stroke-width:1.6; fill:none}
+.jhead{fill:currentColor; fill-opacity:.3}
+
+/* entry cards */
+.entry{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin:24px 0 8px}
+.ecard{text-align:left; background:#fff; border:1px solid var(--c-border-interactive); border-radius:var(--r-lg);
+  padding:20px; cursor:pointer; display:flex; flex-direction:column; gap:8px; font-family:var(--font-primary);
+  transition:opacity .18s ease, transform .18s ease}
+.ecard:hover{opacity:.85; transform:translateY(-1px)}
+.ecard .eq{font-size:16px; font-weight:700; letter-spacing:-0.2px; color:var(--c-text-heading); line-height:1.35}
+.ecard .ea{font-size:13.5px; color:var(--c-text-muted); line-height:1.55}
+.ecard .ego{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.08em;
+  color:var(--c-accent-violet-text); margin-top:2px}
+
+.rules{display:grid; grid-template-columns:repeat(auto-fit,minmax(238px,1fr)); gap:16px; margin:24px 0 8px}
+.rulecard{border:1px solid var(--c-border-light); border-radius:var(--r-lg); padding:24px;
+  display:flex; flex-direction:column; gap:12px}
+.rulecard .ce{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--c-accent-violet-text)}
+.rulecard .ct{font-size:18px; font-weight:700; letter-spacing:-0.2px; line-height:1.35; color:var(--c-text-heading)}
+.rulecard .cb{font-size:14px; color:var(--c-text-body); line-height:1.6}
+
+.wrap-scroll{overflow-x:auto; margin:20px 0 24px}
+table.spec{width:100%; min-width:560px; border-collapse:collapse; font-size:14px}
+table.spec th, table.spec td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--c-border-subtle);
+  vertical-align:top; line-height:1.6; color:var(--c-text-body)}
+table.spec th{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--c-text-faint); font-weight:500; white-space:nowrap}
+table.spec tbody tr:last-child td{border-bottom:0}
+table.spec td.m{font-family:var(--font-mono); font-size:12.5px; letter-spacing:0}
+table.spec td.k{font-weight:700; color:var(--c-text-heading)}
+table.spec td.nowrap{white-space:nowrap}
+td .dim{color:var(--c-text-subtle)} td .say{color:var(--c-accent-violet-text)}
+td .no{color:var(--c-accent-pink)} td .yes{color:var(--c-ok-text)}
+
+.pill{display:inline-flex; align-items:center; font-family:var(--font-mono); font-size:11px; font-weight:600;
+  letter-spacing:.01em; padding:5px 11px; border-radius:var(--r-pill); background:#fff;
+  color:var(--c-accent-violet-text); border:1px solid rgba(138,119,224,.28); white-space:nowrap}
+
+/* wizard */
+.wiz{display:flex; flex-direction:column; gap:14px; margin:28px 0 8px}
+.q{border:1px solid var(--c-border-light); border-radius:var(--r-lg); padding:20px 22px;
+  display:flex; flex-direction:column; gap:13px}
+.q[hidden]{display:none!important}
+.q .qh{display:flex; align-items:baseline; gap:11px; flex-wrap:wrap}
+.q .qn{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--c-accent-violet-text); flex:0 0 auto}
+.q .qt{font-size:17px; font-weight:700; letter-spacing:-0.2px; color:var(--c-text-heading)}
+.q .qs{font-size:13.5px; color:var(--c-text-faint); flex:1 1 100%; margin-top:-4px}
+.opts{display:flex; flex-wrap:wrap; gap:8px}
+.opt{font-family:var(--font-primary); font-size:14px; font-weight:500; letter-spacing:-0.01em;
+  text-align:left; padding:10px 16px; border-radius:var(--r-sm); cursor:pointer; line-height:1.45;
+  background:#fff; color:var(--c-text-body); border:1px solid var(--c-border-interactive);
+  transition:opacity .18s ease, transform .18s ease}
+.opt:hover{opacity:.85; transform:translateY(-1px)}
+.opt[aria-pressed="true"]{background:var(--c-bg-dark); color:var(--c-text-white);
+  border-color:var(--c-bg-dark); font-weight:600}
+.opt .sub{display:block; font-size:12.5px; font-weight:400; opacity:.62; margin-top:3px}
+.wizbar{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:6px 0 0}
+.crumbs{font-family:var(--font-mono); font-size:12px; color:var(--c-text-subtle); letter-spacing:0}
+.crumbs b{color:var(--c-text-strong); font-weight:600}
+.reset{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  background:transparent; border:1px solid var(--c-border-interactive); color:var(--c-text-dark);
+  padding:6px 12px; border-radius:var(--r-sm); cursor:pointer; transition:opacity .18s ease, transform .18s ease}
+.reset:hover{opacity:.85; transform:translateY(-1px)}
+
+.result{margin-top:26px; border:1px solid rgba(138,119,224,.34); border-radius:var(--r-lg); overflow:hidden}
+.res-h{padding:18px 22px; background:rgba(138,119,224,.06); border-bottom:1px solid rgba(138,119,224,.2);
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.res-h .rl{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--c-accent-violet-text)}
+.res-h .rt{font-size:19px; font-weight:700; letter-spacing:-0.3px; color:var(--c-text-heading); flex:1 1 auto}
+.res-h .count{font-family:var(--font-mono); font-size:11.5px; color:var(--c-text-faint)}
+.res-h .count.over{color:var(--c-accent-pink); font-weight:700}
+.res-body pre{margin:0; padding:24px 22px; font-family:var(--font-mono); font-size:13px; line-height:1.88;
+  white-space:pre-wrap; word-break:break-word; color:var(--c-text-heading); letter-spacing:0; overflow-x:auto}
+.res-sec{border-top:1px solid var(--c-border-subtle); padding:18px 22px}
+.res-sec .sh{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--c-text-faint); margin-bottom:11px; display:block}
+.res-sec.why{background:var(--c-bg-light)}
+.res-sec p{font-size:14.5px; color:var(--c-text-body); line-height:1.65; margin:0; max-width:none}
+.fill{list-style:none; padding:0; margin:0; max-width:none}
+.fill li{display:grid; grid-template-columns:210px 1fr; gap:14px; padding:8px 0; margin:0;
+  border-bottom:1px solid var(--c-border-subtle); font-size:14px; line-height:1.55}
+.fill li:last-child{border-bottom:0}
+.fill li .tok{font-family:var(--font-mono); font-size:12.5px; color:var(--c-accent-violet-text); letter-spacing:0}
+@media(max-width:640px){.fill li{grid-template-columns:1fr; gap:2px}}
+.guards{list-style:none; padding:0; margin:0; max-width:none}
+.guards li{padding:9px 0; margin:0; border-bottom:1px solid var(--c-border-subtle);
+  font-size:14px; line-height:1.55; display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.guards li:last-child{border-bottom:0}
+.guards .x{font-family:var(--font-mono); font-size:12.5px; color:var(--c-accent-pink); letter-spacing:0}
+.guards .o{font-family:var(--font-mono); font-size:12.5px; color:var(--c-ok-text); letter-spacing:0}
+@media(max-width:640px){.guards li{grid-template-columns:1fr; gap:3px}}
+.res-sec.stop{background:rgba(255,38,106,.04)}
+.res-sec.stop .sh{color:var(--c-accent-pink)}
+.blocked{border-color:rgba(255,38,106,.3)}
+.blocked .res-h{background:rgba(255,38,106,.05); border-bottom-color:rgba(255,38,106,.2)}
+.blocked .res-h .rl{color:var(--c-accent-pink)}
+.calm{border-color:var(--c-border-interactive)}
+.calm .res-h{background:var(--c-bg-light); border-bottom-color:var(--c-border-subtle)}
+.calm .res-h .rl{color:var(--c-text-muted)}
+
+.copy{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  background:transparent; border:1px solid var(--c-border-interactive); color:var(--c-text-dark);
+  padding:6px 12px; border-radius:var(--r-sm); cursor:pointer;
+  transition:opacity .18s ease, transform .18s ease; white-space:nowrap}
+.copy:hover{opacity:.85; transform:translateY(-1px)}
+.copy.done{border-color:var(--c-accent-green); color:var(--c-ok-text)}
+
+.tmpl{border:1px solid var(--c-border-light); border-radius:var(--r-lg); margin-bottom:16px; overflow:hidden}
+.tmpl-h{display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid var(--c-border-subtle)}
+.tmpl-h .chan{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--c-text-muted)}
+.tmpl-h .copy{margin-left:auto}
+.tmpl pre{margin:0; padding:22px 20px; font-family:var(--font-mono); font-size:13px; line-height:1.85;
+  white-space:pre-wrap; word-break:break-word; color:var(--c-text-heading); overflow-x:auto; letter-spacing:0}
+.tmpl .why{padding:14px 20px 16px; background:var(--c-bg-light); border-top:1px solid var(--c-border-subtle);
+  font-size:13.5px; color:var(--c-text-muted); line-height:1.65; margin:0; max-width:none}
+.tmpl .why b{color:var(--c-text-strong); font-weight:700}
+
+.days{border:1px solid var(--c-border-light); border-radius:var(--r-lg); overflow:hidden; margin:24px 0 8px}
+.day{display:grid; grid-template-columns:86px 1fr; border-bottom:1px solid var(--c-border-subtle)}
+.day:last-child{border-bottom:0}
+.day.rest{background:var(--c-bg-light)}
+.day .d{font-family:var(--font-mono); font-size:12.5px; font-weight:600; color:var(--c-accent-violet-text);
+  padding:16px 14px; border-right:1px solid var(--c-border-subtle); background:var(--c-bg-light)}
+.day.rest .d{color:var(--c-text-faint)}
+.day .b{padding:16px 20px; display:flex; flex-direction:column; gap:6px}
+.day .b .t{font-size:15.5px; font-weight:700; letter-spacing:-0.2px; color:var(--c-text-heading)}
+.day .b .t .mins{font-family:var(--font-mono); font-size:11px; font-weight:500; color:var(--c-text-faint);
+  margin-left:8px; letter-spacing:.04em}
+.day .b p{margin:0; font-size:14.5px; color:var(--c-text-body); line-height:1.6; max-width:660px}
+.day .b .dont{font-size:13.5px; color:var(--c-accent-pink)}
+
+.note{background:var(--c-bg-light); border:1px solid var(--c-border-light); border-radius:var(--r-md);
+  padding:18px 20px; font-size:14.5px; color:var(--c-text-muted); line-height:1.65; margin:24px 0; max-width:800px}
+.note p{font-size:14.5px; color:var(--c-text-muted); margin:0; max-width:none}
+.note p + p{margin-top:10px}
+.note ul{margin:8px 0 0; max-width:none} .note li{font-size:14.5px; color:var(--c-text-muted)}
+.note b{color:var(--c-text-strong); font-weight:700}
+.note .h{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.1em;
+  color:var(--c-accent-violet-text); display:block; margin-bottom:8px; font-weight:600}
+.note.warn{border-color:rgba(255,38,106,.22); background:rgba(255,38,106,.035)}
+.note.warn .h{color:var(--c-accent-pink)}
+
+.gb{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0}
+@media(max-width:720px){.gb{grid-template-columns:1fr}}
+.gb > div{border:1px solid var(--c-border-light); border-radius:var(--r-lg); padding:20px}
+.gb .hd{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; margin-bottom:14px; display:block}
+.gb .g .hd{color:var(--c-ok-text)} .gb .b .hd{color:var(--c-accent-pink)}
+.gb ul{list-style:none; padding:0; margin:0; max-width:none}
+.gb li{font-family:var(--font-mono); font-size:12.5px; line-height:1.6; padding:9px 0; letter-spacing:0;
+  border-bottom:1px solid var(--c-border-subtle); color:var(--c-text-body)}
+.gb li:last-child{border-bottom:0}
+.gb li span{display:block; font-family:var(--font-primary); font-size:12.5px; color:var(--c-text-faint);
+  margin-top:4px; letter-spacing:-0.01em}
+
+.case{border:1px solid var(--c-border-light); border-radius:var(--r-lg); overflow:hidden; margin:24px 0 32px}
+.case-h{padding:20px 24px; background:var(--c-bg-light); border-bottom:1px solid var(--c-border-subtle)}
+.case-h .ce{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--c-accent-violet-text); display:block; margin-bottom:6px}
+.case-h .ct{font-size:21px; font-weight:700; letter-spacing:-0.3px; color:var(--c-text-heading); display:block}
+.case-h .cm{font-family:var(--font-mono); font-size:12px; color:var(--c-text-subtle); margin-top:7px; display:block}
+.case-b{padding:22px 24px}
+.case-b h4{margin-top:0}
+.quote{border-left:3px solid rgba(138,119,224,.35); padding:2px 0 2px 16px; margin:14px 0 18px;
+  font-family:var(--font-mono); font-size:12.5px; line-height:1.8; color:var(--c-text-body); letter-spacing:0; max-width:700px}
+.quote .who{display:block; font-family:var(--font-primary); font-size:12.5px; color:var(--c-text-faint);
+  margin-top:8px; letter-spacing:-0.01em}
+.took{list-style:none; padding:0; margin:14px 0 0; max-width:none}
+.took li{display:grid; grid-template-columns:1fr 200px; gap:16px; padding:12px 0;
+  border-bottom:1px solid var(--c-border-subtle); font-size:14.5px; line-height:1.6; margin:0}
+.took li:last-child{border-bottom:0}
+.took li .to{font-size:13px; color:var(--c-text-faint); text-align:right}
+@media(max-width:720px){.took li{grid-template-columns:1fr} .took li .to{text-align:left}}
+
+.nextstep{margin-top:48px; padding-top:28px; border-top:1px solid var(--c-border-light);
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.nextstep .nl{font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--c-text-faint)}
+.btn-next, .btn-back{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-primary);
+  font-size:14px; font-weight:500; padding:10px 16px; border-radius:var(--r-sm); cursor:pointer;
+  transition:opacity .18s ease, transform .18s ease}
+.btn-next{border:1px solid var(--c-bg-dark); background:var(--c-bg-dark); color:var(--c-text-white)}
+.btn-back{border:1px solid var(--c-border-interactive); background:transparent; color:var(--c-text-dark)}
+.btn-next:hover, .btn-back:hover{opacity:.85; transform:translateY(-1px)}
+
+footer.foot{padding:34px 0 72px; border-top:1px solid var(--c-border-light); margin-top:56px}
+.foot-links{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px}
+.foot-links button{font-family:var(--font-primary); font-size:13px; font-weight:500; color:var(--c-text-muted);
+  background:transparent; border:1px solid var(--c-border-light); border-radius:var(--r-sm);
+  padding:8px 14px; cursor:pointer; transition:opacity .18s ease, transform .18s ease}
+.foot-links button:hover{opacity:.85; transform:translateY(-1px); color:var(--c-text-dark)}
+.foot-meta{font-family:var(--font-mono); font-size:11.5px; color:var(--c-text-faint); line-height:1.9}
+.foot-meta b{color:var(--c-text-strong); font-weight:600}
+
+@media(max-width:768px){
+  .wrap{padding:0 20px}
+  header.mast{padding:44px 0 24px}
+  .mast h1{font-size:36px; line-height:1.18; letter-spacing:-0.8px}
+  .mast p.dek{font-size:15px}
+  h2{font-size:26px; letter-spacing:-0.4px; line-height:1.3}
+  h3{font-size:20px; line-height:1.3}
+  p, p.lead{font-size:15px}
+  .panelwrap{padding:40px 0 64px}
+  .day{grid-template-columns:1fr}
+  .day .d{border-right:0; border-bottom:1px solid var(--c-border-subtle); padding:11px 16px}
+  .opts{flex-direction:column} .opt{width:100%}
+  figure.journey{overflow-x:auto} figure.journey svg{min-width:700px}
+  .tabgap{flex:0 0 12px}
+  .nextstep .btn-next, .nextstep .btn-back{flex:1 1 100%; justify-content:center}
+}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <span class="eyebrow">CUBIG GTM · Outbound Kit</span>
+    <h1>아웃바운드 키트</h1>
+    <p class="dek">해외 잠재고객에게 링크드인 메시지나 메일을 보낼 때 쓰는 문안 모음입니다. 우리가 실제로 <strong>받아 본 아웃바운드</strong>를 뜯어보고 만들었습니다. 세일즈 담당이 아니어도 이 페이지만 보고 보낼 수 있습니다.</p>
+    <div class="src">
+      <span><b>최종 업데이트</b> 2026-09-04</span>
+      <span><b>담당</b> GTM 하수경</span>
+      <span><b>문안</b> 영문 · <b>설명</b> 국문</span>
+    </div>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="wrap" role="tablist" aria-label="아웃바운드 키트 섹션">
+    <button class="tab" role="tab" id="tab-start"   aria-controls="p-start"   aria-selected="true">시작하기</button>
+    <button class="tab" role="tab" id="tab-before"  aria-controls="p-before"  aria-selected="false"><span class="tn">01</span>보내기 전에</button>
+    <button class="tab" role="tab" id="tab-comment" aria-controls="p-comment" aria-selected="false"><span class="tn">02</span>댓글 쓰는 법</button>
+    <button class="tab" role="tab" id="tab-first"   aria-controls="p-first"   aria-selected="false"><span class="tn">03</span>첫 메시지</button>
+    <button class="tab" role="tab" id="tab-reply"   aria-controls="p-reply"   aria-selected="false"><span class="tn">04</span>답장이 오면</button>
+    <button class="tab" role="tab" id="tab-nore"    aria-controls="p-nore"    aria-selected="false"><span class="tn">05</span>답이 없으면</button>
+    <span class="tabgap" aria-hidden="true"></span>
+    <button class="tab aside" role="tab" id="tab-lib" aria-controls="p-lib" aria-selected="false">자료실</button>
+  </div>
+</div>
+
+<div class="panelwrap">
+<div class="wrap">
+
+<!-- ════════ 시작하기 ════════ -->
+<div role="tabpanel" id="p-start" aria-labelledby="tab-start">
+
+  <section class="block">
+    <span class="eyebrow">전체 흐름</span>
+    <h2>링크드인은 2주, 메일은 오늘</h2>
+    <p class="lead">첫 갈림길은 이거 하나입니다. 링크드인은 바로 보내면 안 되고 준비가 2주 걸립니다. 메일은 오늘 보낼 수 있습니다. 메시지를 보낸 다음은 둘 다 같습니다.</p>
+
+    <figure class="journey">
+      <svg viewBox="0 0 900 216" role="img" aria-label="링크드인으로 보내려면 2주 동안 댓글을 달아 준비한 뒤 메시지를 보내고, 메일은 준비 없이 오늘 바로 보냅니다. 두 경로 모두 메시지를 보낸 다음 답장 대응으로 이어지며, 답이 없으면 최대 세 번까지만 보냅니다.">
+        <defs>
+          <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon class="jhead" points="0,0 8,4 0,8"></polygon>
+          </marker>
+        </defs>
+
+        <text class="jlane" x="16" y="60">링크드인</text>
+        <text class="jlane" x="16" y="172">이메일</text>
+
+        <path class="jline" d="M366 56 H392 Q412 56 412 76 V96 Q412 108 424 108 H428" marker-end="url(#ah)"></path>
+        <path class="jline" d="M366 168 H392 Q412 168 412 148 V128 Q412 116 424 116 H428" marker-end="url(#ah)"></path>
+        <line class="jline" x1="622" y1="112" x2="656" y2="112" marker-end="url(#ah)"></line>
+
+        <rect class="jbox" x="116" y="24" width="250" height="64" rx="12"></rect>
+        <text class="jt" x="241" y="52" text-anchor="middle">2주 동안 댓글 달기</text>
+        <text class="jd" x="241" y="72" text-anchor="middle">1~14일차</text>
+
+        <rect class="jbox" x="116" y="136" width="250" height="64" rx="12"></rect>
+        <text class="jt" x="241" y="164" text-anchor="middle">준비 없이 바로</text>
+        <text class="jd" x="241" y="184" text-anchor="middle">오늘</text>
+
+        <rect class="jbox jbox-key" x="432" y="80" width="190" height="64" rx="12"></rect>
+        <text class="jt" x="527" y="108" text-anchor="middle">메시지 보내기</text>
+        <text class="jd" x="527" y="128" text-anchor="middle">골라서 하나</text>
+
+        <rect class="jbox jbox-key" x="660" y="80" width="224" height="64" rx="12"></rect>
+        <text class="jt" x="772" y="108" text-anchor="middle">답장</text>
+        <text class="jd" x="772" y="128" text-anchor="middle">없으면 최대 세 번까지</text>
+      </svg>
+      <figcaption>링크드인으로 보낼 때만 준비가 필요합니다. 메시지를 보낸 뒤에는 답이 없어도 <strong>총 세 번</strong>까지만 보내고 닫습니다.</figcaption>
+    </figure>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Start here</span>
+    <h2>지금 뭐 하려고 오셨어요?</h2>
+    <p class="lead">하나 누르면 필요한 곳으로 바로 갑니다. 전부 읽을 필요 없습니다.</p>
+
+    <div class="entry">
+      <button class="ecard" type="button" data-goto="before">
+        <span class="eq">링크드인으로 처음 연락하려고요</span>
+        <span class="ea">바로 보내면 잡상인이 됩니다. 2주짜리 준비 표를 그대로 따라가세요.</span>
+        <span class="ego">01 보내기 전에 →</span>
+      </button>
+      <button class="ecard" type="button" data-goto="first">
+        <span class="eq">메일로 처음 연락하려고요</span>
+        <span class="ea">준비 없이 오늘 보낼 수 있습니다. 몇 번 고르면 메시지 하나가 나옵니다.</span>
+        <span class="ego">03 첫 메시지 →</span>
+      </button>
+      <button class="ecard" type="button" data-goto="reply">
+        <span class="eq">답장이 왔어요</span>
+        <span class="ea">다섯 유형 중 하나입니다. 24시간 안에 답합니다.</span>
+        <span class="ego">04 답장이 오면 →</span>
+      </button>
+      <button class="ecard" type="button" data-goto="nore">
+        <span class="eq">보냈는데 답이 없어요</span>
+        <span class="ea">지금 보내도 되는 때인지부터 확인합니다. 아직일 수도 있습니다.</span>
+        <span class="ego">05 답이 없으면 →</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Rules</span>
+    <h2>어떤 문안을 쓰든 지키는 네 가지</h2>
+    <p class="lead">문안을 조금 고쳐 쓰는 건 괜찮습니다. 다만 아래 네 가지 중 하나라도 어기면 보내지 않습니다.</p>
+    <div class="rules">
+      <div class="rulecard"><span class="ce">Rule 01</span>
+        <span class="ct">첫 메시지에서 미팅을 요청하지 않습니다</span>
+        <span class="cb">거절하기 부담스러운 요청을 처음부터 하면 답장 자체를 안 합니다. 미팅은 두 번째나 세 번째에 꺼냅니다.</span></div>
+      <div class="rulecard"><span class="ce">Rule 02</span>
+        <span class="ct">첫 줄에 트리거를 그대로 인용합니다</span>
+        <span class="cb">"귀사의 AI 사업에 관심이 있어"로 시작하면 사내에서 전달되지 않습니다. 상대가 실제로 쓴 문장을 그대로 넣습니다.</span></div>
+      <div class="rulecard"><span class="ce">Rule 03</span>
+        <span class="ct">성능이 오른다고 단정하지 않습니다</span>
+        <span class="cb">승인되지 않은 성과 수치는 쓰지 않습니다. 장담하면 다음 질문에 답할 수 없습니다.</span></div>
+      <div class="rulecard"><span class="ce">Rule 04</span>
+        <span class="ct">회사 계정이 아니라 본인 계정으로 보냅니다</span>
+        <span class="cb">개인 발신의 답장률이 높습니다.</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">용어</span>
+    <h2>다섯 개만 알면 됩니다</h2>
+    <div class="wrap-scroll">
+      <table class="spec">
+        <thead><tr><th>용어</th><th>뜻</th></tr></thead>
+        <tbody>
+          <tr><td class="k nowrap">콜드메일</td><td>일면식 없는 사람에게 처음 보내는 메일입니다. 답장이 안 오는 게 기본이라 첫 문장이 전부입니다.</td></tr>
+          <tr><td class="k nowrap">커넥션 메모</td><td>링크드인에서 연결 요청을 보낼 때 같이 붙이는 짧은 글입니다. <strong>300자 제한</strong>이 있습니다.</td></tr>
+          <tr><td class="k nowrap">DM</td><td>연결이 수락된 다음 보내는 링크드인 메시지입니다. 커넥션 메모보다 길게 쓸 수 있습니다.</td></tr>
+          <tr><td class="k nowrap">트리거</td><td>이 사람에게 <strong>지금</strong> 연락하는 이유가 되는 사건입니다. 새 제품 출시, 채용 공고, 임원 부임 같은 것. 공개된 정보여야 합니다.</td></tr>
+          <tr><td class="k nowrap">워밍업</td><td>바로 메시지를 보내지 않고 2주 동안 상대 게시물에 댓글을 달며 얼굴을 익히는 것입니다. 링크드인에만 해당합니다.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="h">이 페이지가 하지 않는 것</span>
+      <p>보낼 사람을 <b>찾는</b> 곳은 아닙니다. 리드 발굴·리스트 관리·발송 자동화는 국내사업팀 세일즈 에이전트와 <a href="https://cubig.atlassian.net/wiki/spaces/TPT/pages/455180405/Apollo">Apollo 실행 매뉴얼</a>이 담당합니다. 여기는 <b>보낼 사람이 이미 정해졌을 때</b> 뭐라고 쓸지 찾는 곳입니다.</p>
+    </div>
+
+    <div class="nextstep">
+      <span class="nl">다음</span>
+      <button class="btn-next" type="button" data-goto="before">링크드인으로 보낼 거예요 →</button>
+      <button class="btn-back" type="button" data-goto="first">메일로 보낼 거예요 →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ════════ 01 보내기 전에 ════════ -->
+<div role="tabpanel" id="p-before" aria-labelledby="tab-before" hidden>
+  <section class="block">
+    <span class="eyebrow">01 · 링크드인만</span>
+    <h2>2주 동안 얼굴을 익힙니다</h2>
+    <p class="lead">연결 요청을 수락받자마자 제안을 보내면 잡상인으로 읽힙니다. <strong>목표는 파는 것이 아니라 아는 얼굴이 되는 것입니다.</strong> 하루 3~15분이면 됩니다.</p>
+
+    <div class="note">
+      <span class="h">메일만 보낼 거면</span>
+      <p>이 탭은 건너뛰고 <a href="#" data-goto="first">03 첫 메시지</a>로 바로 가세요. 대신 트리거를 더 정확하게 인용해야 합니다. 링크드인은 댓글로 신뢰를 쌓을 시간이 있지만 메일은 첫 문장이 전부입니다.</p>
+    </div>
+
+    <div class="days">
+      <div class="day"><div class="d">1일차</div><div class="b">
+        <span class="t">프로필 보고 좋아요 하나<span class="mins">3분</span></span>
+        <p>프로필을 열어 소개 문단과 최근 게시물 세 개를 읽습니다. 가장 최근 글에 좋아요만 누릅니다. 상대에게 "누가 내 프로필을 봤습니다" 알림이 갑니다. 오늘은 이게 전부입니다.</p>
+        <span class="dont">아직 연결 요청도, 댓글도 안 됩니다.</span></div></div>
+      <div class="day rest"><div class="d">2일차</div><div class="b"><span class="t">쉽니다</span><p>아무것도 하지 않습니다.</p></div></div>
+      <div class="day"><div class="d">3일차</div><div class="b">
+        <span class="t">첫 댓글<span class="mins">10분</span></span>
+        <p><a href="#" data-goto="comment">02 댓글 쓰는 법</a>에서 세 가지 중 하나를 골라 씁니다. 두세 문장이면 됩니다.</p>
+        <span class="dont">"좋은 글이네요" 같은 댓글은 안 다느니만 못합니다.</span></div></div>
+      <div class="day rest"><div class="d">4–5일차</div><div class="b"><span class="t">쉽니다</span><p>상대가 새 글을 올리면 좋아요만 누릅니다.</p></div></div>
+      <div class="day"><div class="d">6일차</div><div class="b">
+        <span class="t">두 번째 댓글<span class="mins">10분</span></span>
+        <p>첫 댓글과 <strong>다른 형태</strong>로 씁니다. 처음에 경험을 보탰으면 이번엔 질문을 합니다. 같은 형태를 반복하면 봇처럼 보입니다.</p></div></div>
+      <div class="day"><div class="d">8일차</div><div class="b">
+        <span class="t">연결 요청 보내기<span class="mins">5분</span></span>
+        <p><a href="#" data-goto="first">03 첫 메시지</a>에서 채널을 링크드인, 단계를 "댓글 두 번 달았음"으로 고르면 커넥션 메모가 나옵니다.</p></div></div>
+      <div class="day"><div class="d">10일차</div><div class="b">
+        <span class="t">세 번째 댓글<span class="mins">10분</span></span>
+        <p>수락됐든 안 됐든 댓글은 계속 답니다. 수락이 안 된 상태에서 다는 댓글이 오히려 수락률을 올립니다.</p></div></div>
+      <div class="day"><div class="d">12일차</div><div class="b">
+        <span class="t">자료 하나 공유<span class="mins">10분</span></span>
+        <p>상대가 관심 있을 만한 <strong>남의 자료</strong>를 공유합니다. 우리 자료가 아닙니다. 리포트, 벤치마크, 컨퍼런스 영상 같은 것. 여기서 "파는 사람"이 "이 주제 아는 사람"으로 바뀝니다.</p></div></div>
+      <div class="day"><div class="d">14일차</div><div class="b">
+        <span class="t">DM 보내기<span class="mins">15분</span></span>
+        <p><a href="#" data-goto="first">03 첫 메시지</a>에서 단계를 "연결이 수락됐습니다"로 고르면 DM이 나옵니다.</p></div></div>
+    </div>
+
+    <div class="note warn">
+      <span class="h">한 번에 5~8명까지만</span>
+      <p>동시에 준비할 수 있는 인원은 <b>한 사람당 5~8명이 한계</b>입니다. 그 이상이면 댓글의 질이 떨어지고, 성의 없는 댓글은 안 다느니만 못합니다. 대상이 30명이어도 8명씩 끊어서 돌립니다.</p>
+    </div>
+    <div class="note">
+      <span class="h">2주가 지났는데 반응이 없으면</span>
+      <p>연결 수락도 안 되고 댓글에 반응도 없으면 <b>그 사람은 링크드인을 잘 안 쓰는 사람</b>입니다. 실패가 아니라 채널이 안 맞는 것이므로 메일로 옮깁니다.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">공통</span>
+    <h2>언제 보내나</h2>
+    <p class="lead">링크드인이든 메일이든 도착 시각이 열람률을 바꿉니다.</p>
+    <div class="wrap-scroll">
+      <table class="spec">
+        <thead><tr><th>대상 지역</th><th>도착해야 하는 시각 (현지)</th><th>한국 시각으로</th><th>피할 때</th></tr></thead>
+        <tbody>
+          <tr><td class="k">영국 · 서유럽</td><td class="m">화·수·목 07:30–09:00</td><td class="m">15:30–17:00</td><td>월요일 오전, 금요일 오후</td></tr>
+          <tr><td class="k">미국 동부</td><td class="m">화·수·목 07:00–08:30</td><td class="m">20:00–21:30</td><td>월요일, 금요일 전체</td></tr>
+          <tr><td class="k">미국 서부</td><td class="m">화·수·목 07:00–08:30</td><td class="m">23:00–00:30</td><td>월요일, 금요일 전체</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>메일은 <strong>예약 발송</strong>을 씁니다. 한국 시간 새벽에 직접 앉아서 보내지 마세요.</p>
+
+    <div class="nextstep">
+      <span class="nl">다음</span>
+      <button class="btn-next" type="button" data-goto="comment">댓글 쓰는 법 보기 →</button>
+      <button class="btn-back" type="button" data-goto="first">바로 메시지 고르기 →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ════════ 02 댓글 쓰는 법 ════════ -->
+<div role="tabpanel" id="p-comment" aria-labelledby="tab-comment" hidden>
+  <section class="block">
+    <span class="eyebrow">02 · 링크드인만</span>
+    <h2>댓글 쓰는 법</h2>
+    <p class="lead">준비 기간의 성패가 여기서 갈립니다. 좋은 댓글은 <strong>상대 글에 없던 정보를 하나 더합니다.</strong> 아래 세 가지 중 하나를 골라 쓰면 됩니다. 그대로 복사해서 상황에 맞게 몇 단어만 바꾸세요.</p>
+
+    <h3>1. 경험을 보탠다</h3>
+    <p>가장 무난하고 답글을 가장 자주 받습니다. <strong>처음 다는 댓글은 이걸로 시작하세요.</strong></p>
+    <div class="tmpl">
+      <div class="tmpl-h"><span class="chan">Comment</span><button class="copy" type="button">복사</button></div>
+      <pre>We run into the same thing, usually right at the point of moving from pilot to production. The part that surprised us was how often it turned out to be the data rather than the model — teams had already spent a cycle tuning before checking that.</pre>
+      <p class="why"><b>구조</b> 첫 문장은 "나도 본다 + 언제 보는지". 둘째 문장은 상대 글에 없던 관찰 하나. 제품 이야기는 넣지 않습니다.</p>
+    </div>
+
+    <h3>2. 한 단계 더 들어간 질문을 한다</h3>
+    <p>두 번째 댓글에 씁니다. 답을 받으면 그 답이 나중에 DM 첫 문장의 재료가 됩니다.</p>
+    <div class="tmpl">
+      <div class="tmpl-h"><span class="chan">Comment</span><button class="copy" type="button">복사</button></div>
+      <pre>Curious how you handle the case where the evaluation set itself drifts. That's usually where it stops being comparable for us, and I haven't seen a clean answer to it anywhere.</pre>
+      <p class="why"><b>구조</b> 상대가 다루지 않은 <b>세부 상황</b>을 하나 집어 묻습니다. "좋은 글 잘 봤습니다" 같은 서두 없이 바로 질문으로 들어갑니다.</p>
+    </div>
+
+    <h3>3. 조심스럽게 다른 사례를 든다</h3>
+    <p>셋 중 가장 강하지만 가장 위험합니다. <strong>한 사람에게 한 번만</strong> 쓰고, 확신이 없으면 쓰지 마세요.</p>
+    <div class="tmpl">
+      <div class="tmpl-h"><span class="chan">Comment</span><button class="copy" type="button">복사</button></div>
+      <pre>Agree on most of this, though we've seen the opposite in one case: the model was fine and the regression came entirely from an upstream schema change nobody flagged. Made me a lot less confident about attributing these to the model first.</pre>
+      <p class="why"><b>주의</b> <b>반드시 구체적인 사례를 함께 냅니다.</b> 근거 없이 "그건 아닌 것 같습니다"만 쓰면 그 계정은 그날로 끝납니다.</p>
+    </div>
+
+    <div class="gb">
+      <div class="g"><span class="hd">이렇게 씁니다</span>
+        <ul>
+          <li>두세 문장, 40~60단어<span>스크롤 한 번에 다 읽히는 길이</span></li>
+          <li>글이 올라온 지 두 시간 안에<span>초반 댓글이 더 많이 노출되고 상대도 확인 중입니다</span></li>
+          <li>구체적인 상황을 하나 넣습니다<span>"자주"가 아니라 "파일럿에서 운영으로 넘어갈 때"</span></li>
+          <li>답글이 오면 반드시 한 번 더 답합니다<span>여기서 대화가 열립니다</span></li>
+        </ul></div>
+      <div class="b"><span class="hd">이러면 안 됩니다</span>
+        <ul>
+          <li>Great post! / Totally agree / 100%<span>정보가 없어서 안 다느니만 못합니다</span></li>
+          <li>우리 제품이나 회사 언급, 링크 첨부<span>이 순간 광고 계정이 됩니다</span></li>
+          <li>"DM 드렸습니다" "메일 확인 부탁드립니다"<span>공개된 자리에서 사적인 요청을 하면 상대가 곤란해집니다</span></li>
+          <li>같은 날 여러 글에 연달아 댓글<span>알림이 도배돼 차단으로 이어집니다</span></li>
+          <li>이모지만 남기기<span>사람에게도 알고리즘에도 안 잡힙니다</span></li>
+        </ul></div>
+    </div>
+
+    <div class="nextstep">
+      <span class="nl">다음</span>
+      <button class="btn-next" type="button" data-goto="first">메시지 고르러 가기 →</button>
+      <button class="btn-back" type="button" data-goto="before">← 14일 표 다시 보기</button>
+    </div>
+  </section>
+</div>
+
+<!-- ════════ 03 첫 메시지 ════════ -->
+<div role="tabpanel" id="p-first" aria-labelledby="tab-first" hidden>
+  <section class="block">
+    <span class="eyebrow">03</span>
+    <h2>골라서 하나만 받으세요</h2>
+    <p class="lead">아래 질문에 답하면 지금 보낼 메시지 <strong>하나</strong>가 나옵니다. 채워야 할 자리와 이 메시지에서 조심할 말도 같이 나옵니다. 잘못 골랐으면 다시 눌러서 바꾸면 됩니다.</p>
+
+    <div class="wiz" id="wiz1">
+      <div class="q" data-q="trigger">
+        <div class="qh"><span class="qn">Q1</span><span class="qt">지금 연락할 이유가 공개 정보로 확인되나요?</span>
+          <span class="qs">상대가 쓴 글, 채용 공고, 보도자료, 발표 자료 같은 것. 원문 링크와 문장을 확보한 상태여야 합니다.</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="yes">네, 원문을 확보했습니다</button>
+          <button class="opt" type="button" data-v="no">아니요, 아직 없습니다</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="channel" hidden>
+        <div class="qh"><span class="qn">Q2</span><span class="qt">어디로 보내나요?</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="li">링크드인</button>
+          <button class="opt" type="button" data-v="email">이메일</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="stage" hidden>
+        <div class="qh"><span class="qn">Q3</span><span class="qt">이 사람과 지금 어떤 상태인가요?</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="none">댓글을 아직 안 달았습니다<span class="sub">준비 전</span></button>
+          <button class="opt" type="button" data-v="note">댓글 두 번 달았고 아직 연결 전<span class="sub">6일차 이후</span></button>
+          <button class="opt" type="button" data-v="dm">연결이 수락됐습니다<span class="sub">14일차</span></button>
+        </div>
+      </div>
+
+      <div class="q" data-q="situation" hidden>
+        <div class="qh"><span class="qn">Q4</span><span class="qt">상대가 지금 어떤 상황인가요?</span>
+          <span class="qs">둘 다 걸려 보이면 가장 최근에 공개된 쪽을 고릅니다. 3주 전 발표가 8개월 전 발표를 이깁니다.</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="s1">AI를 도입은 했는데 실제 운영으로 못 넘어감</button>
+          <button class="opt" type="button" data-v="s2">같은 분석인데 결과가 달라져서 설명을 못 함</button>
+          <button class="opt" type="button" data-v="s3">학습에 쓸 데이터가 부족하거나 밖으로 못 꺼냄</button>
+          <button class="opt" type="button" data-v="s4">데이터를 옮길 수 없어서 AI 작업이 중간에 끊김</button>
+          <button class="opt" type="button" data-v="s5">인수합병·신규 진출로 데이터 기준이 흔들림</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="deployed" hidden>
+        <div class="qh"><span class="qn">Q5</span><span class="qt">실제로 배포는 했나요?</span>
+          <span class="qs">이미 배포한 팀에게 "배포 전에"라고 쓰면 상황을 모르는 사람이 됩니다.</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="pre">아직 배포 전<span class="sub">출시 발표만 했거나 승인 리뷰를 앞두고 있음</span></button>
+          <button class="opt" type="button" data-v="post">파일럿·배포는 했는데 지표가 안 나옴<span class="sub">파일럿 결과 발표 후 운영 소식이 없음</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wizbar">
+      <span class="crumbs" id="crumbs1"></span>
+      <button class="reset" type="button" data-reset="1">처음부터</button>
+    </div>
+
+    <div id="result1"></div>
+
+    <div class="nextstep">
+      <span class="nl">보낸 다음</span>
+      <button class="btn-next" type="button" data-goto="reply">답장이 왔어요 →</button>
+      <button class="btn-back" type="button" data-goto="nore">답이 없어요 →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ════════ 04 답장이 오면 ════════ -->
+<div role="tabpanel" id="p-reply" aria-labelledby="tab-reply" hidden>
+  <section class="block">
+    <span class="eyebrow">04</span>
+    <h2>다섯 가지 중 하나입니다</h2>
+    <p class="lead">어떤 제품 이야기를 했든 답장은 아래 다섯 유형 중 하나로 옵니다. <strong>24시간 안에 답합니다.</strong> 그 이상 지나면 상대 머릿속에서 맥락이 사라집니다.</p>
+
+    <article class="tmpl">
+      <div class="tmpl-h"><span class="chan">1 · 내 담당이 아니라고 함</span><button class="copy" type="button">복사</button></div>
+      <pre>Hi [name],
+
+Understood, thanks for the quick reply.
+
+Would you be able to point me to whoever owns the data platform or ML platform side? I'll keep it to a short note and won't take much of their time.
+
+Best,
+[내 이름]</pre>
+      <p class="why"><b>왜</b> 거절당해도 담당자 이름은 남깁니다. "I'll keep it short"가 소개해 주는 사람의 부담을 덜어 줍니다. 소개를 받으면 <b>다음 메시지는 우리가 먼저</b> 보냅니다.</p>
+    </article>
+
+    <article class="tmpl">
+      <div class="tmpl-h"><span class="chan">2 · 담당자를 소개해 줌</span><button class="copy" type="button">복사</button></div>
+      <pre>Hi [name],
+
+Thanks, I appreciate you making the introduction.
+
+I'll keep it short with [contact]. Thanks again for pointing me in the right direction.
+
+Best,
+[내 이름]</pre>
+      <p class="why"><b>왜</b> 소개해 준 사람이 이후 대화에도 계속 남아 있게 하는 문장입니다. 소개자가 다시 움직여 주기를 기다리지 않습니다.</p>
+    </article>
+
+    <article class="tmpl">
+      <div class="tmpl-h"><span class="chan">3 · 관심 있다고 함</span><button class="copy" type="button">복사</button></div>
+      <pre>Hi [name],
+
+Here's the one-pager on how this works in practice.
+
+If you prefer to test it directly, you can log into our homepage and run your existing dataset to see it for yourself.
+
+Happy to walk through it on a short call, or to leave it with you.
+
+Best,
+[내 이름]</pre>
+      <p class="why"><b>왜</b> 여기서 처음으로 미팅을 꺼내되 <b>자료만 받고 끝낼 선택지를 함께</b> 둡니다. 둘 다 주면 미팅 수락률이 올라갑니다. Skyflow가 우리 거절에 대응할 때 정확히 이 방식을 썼습니다.</p>
+    </article>
+
+    <article class="tmpl">
+      <div class="tmpl-h"><span class="chan">4 · 지금은 아니라고 함</span><button class="copy" type="button">복사</button></div>
+      <pre>Hi [name],
+
+Understood, and thanks for saying so directly.
+
+One question so I know when to come back rather than guessing. What would need to change on your side for this to be worth looking at? A budget cycle, a specific deployment, or a change in who owns it.
+
+I'll note it and come back at that point rather than before.
+
+Best,
+[내 이름]</pre>
+      <p class="why"><b>왜</b> 선택지 세 개를 주는 이유는 <b>답하기 쉽게</b> 만들기 위해서입니다. 열린 질문으로 두면 답이 오지 않습니다. 이 답을 기록해 두면 다음 분기에 다시 붙을 근거가 됩니다.</p>
+    </article>
+
+    <article class="tmpl">
+      <div class="tmpl-h"><span class="chan">5 · 지금 쓰는 걸로 충분하다고 함</span><button class="copy" type="button">복사</button></div>
+      <pre>Hi [name],
+
+That makes sense, and we're not proposing a replacement.
+
+[Snowflake / Databricks / your current stack] holds and manages the data. What we do sits above that: making the data fit the specific task and model, comparing the result before deployment, and saving the state so a run can be checked again later.
+
+It's the layer between the data platform and the model, not a swap for either.
+
+Best,
+[내 이름]</pre>
+      <p class="why"><b>왜</b> 우리가 가장 자주 받는 반론입니다. 그래서 이 문장은 <b>첫 메시지에 미리 넣어도 됩니다.</b> 상대 도구 이름을 정확히 써야 효과가 있으니 모르면 먼저 확인하세요.</p>
+    </article>
+
+    <div class="nextstep">
+      <span class="nl">다음</span>
+      <button class="btn-next" type="button" data-goto="first">다른 사람에게 또 보내기 →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ════════ 05 답이 없으면 ════════ -->
+<div role="tabpanel" id="p-nore" aria-labelledby="tab-nore" hidden>
+  <section class="block">
+    <span class="eyebrow">05</span>
+    <h2>총 세 번까지만 보냅니다</h2>
+    <p class="lead">답이 없다고 계속 보내면 그 사람과는 영영 끝입니다. 첫 메시지를 포함해 <strong>세 번</strong>이 전부이고, 열흘 안에 끝납니다. 아래에서 지금 보내도 되는 때인지부터 확인하세요.</p>
+
+    <div class="wrap-scroll">
+      <table class="spec">
+        <thead><tr><th>언제</th><th>무엇을</th><th>왜</th></tr></thead>
+        <tbody>
+          <tr><td class="m k nowrap">1일차</td><td class="k">첫 메시지</td><td>트리거를 인용하고 문제 가설을 답니다</td></tr>
+          <tr><td class="m k nowrap">4일차</td><td class="k">두 번째 · 다른 각도</td><td>같은 문제를 <strong>비용</strong>으로 바꿔 씁니다. 새 정보가 있어야 합니다</td></tr>
+          <tr><td class="m k nowrap">10일차</td><td class="k">세 번째 · 닫기</td><td>결정을 요구하지 않고 닫겠다고 알립니다. <strong>셋 중 회신율이 가장 높습니다</strong></td></tr>
+          <tr><td class="m nowrap"><span class="no">그 뒤</span></td><td><span class="no">보내지 않습니다</span></td><td><span class="dim">지금 이 문제를 다루고 있지 않은 것입니다. 네 번째 메일이 하는 일은 다음에 다시 연락할 기회를 없애는 것뿐입니다</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wiz" id="wiz2">
+      <div class="q" data-q="sent">
+        <div class="qh"><span class="qn">Q1</span><span class="qt">지금까지 몇 번 보냈나요?</span>
+          <span class="qs">첫 메시지를 포함해서 셉니다.</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="1">한 번</button>
+          <button class="opt" type="button" data-v="2">두 번</button>
+          <button class="opt" type="button" data-v="3">세 번</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="days" hidden>
+        <div class="qh"><span class="qn">Q2</span><span class="qt">마지막으로 보낸 지 며칠 됐나요?</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="d3">3일 이하</button>
+          <button class="opt" type="button" data-v="d5">4~5일</button>
+          <button class="opt" type="button" data-v="d6">6일 이상</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="route" hidden>
+        <div class="qh"><span class="qn">Q3</span><span class="qt">첫 메시지를 어떤 이야기로 보냈나요?</span>
+          <span class="qs">두 번째 메시지는 첫 메시지와 이어져야 해서 필요합니다.</span></div>
+        <div class="opts">
+          <button class="opt" type="button" data-v="syn-a">배포 전에 데이터를 점검하자</button>
+          <button class="opt" type="button" data-v="syn-b">모델 말고 데이터를 먼저 보자</button>
+          <button class="opt" type="button" data-v="syn-c">결과가 왜 달라졌는지 설명하자</button>
+          <button class="opt" type="button" data-v="dts">이미 가진 데이터를 학습에 쓰자</button>
+          <button class="opt" type="button" data-v="cap">멈춘 AI 작업을 이어 붙이자</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wizbar">
+      <span class="crumbs" id="crumbs2"></span>
+      <button class="reset" type="button" data-reset="2">처음부터</button>
+    </div>
+
+    <div id="result2"></div>
+
+    <div class="nextstep">
+      <span class="nl">다음</span>
+      <button class="btn-next" type="button" data-goto="first">다른 사람에게 보내기 →</button>
+      <button class="btn-back" type="button" data-goto="reply">답장이 왔어요 →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ════════ 자료실 ════════ -->
+<div role="tabpanel" id="p-lib" aria-labelledby="tab-lib" hidden>
+  <section class="block">
+    <span class="eyebrow">자료실</span>
+    <h2>필요할 때만 여세요</h2>
+    <p class="lead">메시지를 보내는 데는 필요 없습니다. 문안을 <strong>고치거나 새로 쓸 때</strong>, 또는 왜 이렇게 쓰는지 근거가 궁금할 때 보는 곳입니다.</p>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">가드레일</span>
+    <h2>쓰면 안 되는 말</h2>
+    <p class="lead">첫 메시지 탭에서는 <strong>고른 메시지에 해당하는 것만</strong> 결과 아래에 붙어 나옵니다. 여기는 전체 목록입니다. CUBIG이 <strong>보안 회사</strong>로 읽히는 순간 진짜 보안 벤더와 비교당하고, 그 비교에서는 우리가 집니다.</p>
+    <div class="wrap-scroll">
+      <table class="spec">
+        <thead><tr><th>쓰지 않습니다</th><th>대신 이렇게</th><th>해당</th></tr></thead>
+        <tbody>
+          <tr><td class="m"><span class="dim">security · protect your data · compliance tool</span></td>
+              <td class="m"><span class="say">make the data usable for the task and model</span></td><td class="nowrap">전체</td></tr>
+          <tr><td class="m"><span class="dim">승인 안 된 성과 수치 (예: 이탈률 20% 개선)</span></td>
+              <td class="m"><span class="say">방식으로 설명하거나, 고객 데이터에서 나온 점수를 씁니다</span></td><td class="nowrap">전체</td></tr>
+          <tr><td class="m"><span class="dim">GDPR · EU AI Act 같은 법률 언급</span></td>
+              <td class="m"><span class="say">법무 검토 전에는 쓰지 않습니다</span></td><td class="nowrap">전체</td></tr>
+          <tr><td class="m"><span class="dim">replaces your data platform</span></td>
+              <td class="m"><span class="say">works alongside existing data stacks</span></td><td class="nowrap">Syntitan</td></tr>
+          <tr><td class="m"><span class="dim">Release State · Run Binding · Diff 등 내부 기능명</span></td>
+              <td class="m"><span class="say">아래 표대로 풀어 씁니다</span></td><td class="nowrap">Syntitan</td></tr>
+          <tr><td class="m"><span class="dim">synthetic generator · fake data · 비식별화 엔진</span></td>
+              <td class="m"><span class="say">AI-ready data transformation engine</span></td><td class="nowrap">DTS</td></tr>
+          <tr><td class="m"><span class="dim">differential privacy · noise · ε</span></td>
+              <td class="m"><span class="say">고객에게 보내는 글에는 아예 쓰지 않습니다</span></td><td class="nowrap">DTS</td></tr>
+          <tr><td class="m"><span class="dim">"데이터를 만들어 드립니다"</span></td>
+              <td class="m"><span class="say">"바꾼 다음 원본과 비교한다" 순서를 반드시 씁니다</span></td><td class="nowrap">DTS</td></tr>
+          <tr><td class="m"><span class="dim">PII masking · tokenization</span></td>
+              <td class="m"><span class="say">structure-preserving substitution</span></td><td class="nowrap">DTS · Capsule</td></tr>
+          <tr><td class="m"><span class="dim">AI gateway · guardrail · AI security suite</span></td>
+              <td class="m"><span class="say">a working version, restored to business values</span></td><td class="nowrap">Capsule</td></tr>
+          <tr><td class="m"><span class="dim">zero exposure · "아무것도 안 나갑니다"</span></td>
+              <td class="m"><span class="say">"구성에 따라 다르니 케이스별로 보자"고 씁니다</span></td><td class="nowrap">Capsule</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="h">헷갈리기 쉬운 구분</span>
+      <p>"고객의 데이터가 민감하고 규제 때문에 못 움직인다"는 <b>고객이 겪는 문제 설명</b>이라 그대로 써도 됩니다. 안 되는 건 "우리는 데이터를 안전하게 지킵니다"처럼 보안을 <b>우리가 하는 일</b>로 앞세우는 쪽입니다.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">용어</span>
+    <h2>내부 기능명은 문안에 쓰지 않습니다</h2>
+    <p class="lead">Release State, Run Binding, Diff 같은 이름은 우리끼리 쓰는 말입니다. 처음 메일을 받는 사람은 모릅니다. (<a href="https://cubig.atlassian.net/wiki/spaces/GST/pages/524451842/2026.09.02.+Syntitan">2026.09.02 워딩 권고</a> 기준. 확정되면 이 표만 갱신합니다.)</p>
+    <div class="wrap-scroll">
+      <table class="spec">
+        <thead><tr><th>내부 기능명</th><th>문안에는 이렇게</th><th>고객 노출 이름 (권고)</th></tr></thead>
+        <tbody>
+          <tr><td class="m k">Release State</td><td class="m">the data state a run used</td><td>Data &amp; Run Record</td></tr>
+          <tr><td class="m k">Data Release</td><td class="m">data version</td><td>Data Versions</td></tr>
+          <tr><td class="m k">Run Binding</td><td class="m">link the run to the data version</td><td>Link Run to Data</td></tr>
+          <tr><td class="m k">Diff</td><td class="m">compare the two data versions</td><td>Compare Data Versions</td></tr>
+          <tr><td class="m k">Change Manifest</td><td class="m">a change record</td><td>Change Details</td></tr>
+          <tr><td class="m k">Reproduce</td><td class="m">the earlier state can be restored</td><td>Restore Data State</td></tr>
+          <tr><td class="m k">Lineage</td><td class="m">source and processing history</td><td>Source &amp; Processing History</td></tr>
+          <tr><td class="m k">Proof Run</td><td class="m">test your dataset</td><td>Model &amp; Agent Data Tests</td></tr>
+          <tr><td class="m k">6축 점수</td><td class="m">the data issues to address</td><td>Data Check Score</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>6축(Usability, Integrity, Context, Consistency, Reproducibility, Traceability) 자체는 그대로입니다. 바뀐 건 고객에게 보여줄 이름뿐입니다.</p>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">출처</span>
+    <h2>이 문안들이 어디서 나왔나</h2>
+    <p class="lead">규칙과 문안은 전부 아래 세 곳에서 왔습니다. 우리가 직접 <strong>받아 본</strong> 아웃바운드 두 건과 세일즈 웨비나 한 건입니다.</p>
+
+    <div class="case">
+      <div class="case-h">
+        <span class="ce">Case 01 · 우리가 받은 링크드인 아웃바운드</span>
+        <span class="ct">Humanta AI</span>
+        <span class="cm">영국 AI 어슈어런스 · 2026-08-12 ~ 08-20</span>
+      </div>
+      <div class="case-b">
+        <h4>무슨 일이 있었나</h4>
+        <p>창업자가 우리 Finance 팀에게 링크드인 DM을 보냈습니다. 미팅을 요청하지 않고 <strong>담당자만 소개해 달라</strong>고 했고, 그렇게 GTM 이메일 주소를 확보했습니다. 우리가 "왜 CUBIG을 골랐냐"고 되묻자, 그제서야 우리 공개 자료를 읽고 <strong>우리가 쓰는 표현을 인용해</strong> 답을 보내왔습니다.</p>
+        <div class="quote">"I'd be interested to explore whether there could be some relevance to CUBIG, or perhaps you could point me towards the right person on your AI/governance side."
+          <span class="who">첫 DM. 미팅 대신 낮은 요청 두 개를 나란히 두었습니다</span></div>
+        <div class="quote">"I don't necessarily see CUBIG and Humanta occupying the same layer. Quite the opposite."
+          <span class="who">경쟁 관계를 우리가 묻기 전에 먼저 부인했습니다</span></div>
+        <h4>가져온 것</h4>
+        <ul class="took">
+          <li><span>첫 메시지에 미팅을 요구하지 않는다</span><span class="to">→ Rule 01</span></li>
+          <li><span>근거가 없으면 되묻기 전까지 진짜 대화가 시작되지 않는다</span><span class="to">→ Rule 02, 첫 메시지 Q1</span></li>
+          <li><span>"우리는 당신을 대체하지 않는다"를 묻기 전에 먼저 말한다</span><span class="to">→ 답장 유형 5</span></li>
+        </ul>
+        <p style="margin-top:18px"><a href="https://cubig.atlassian.net/wiki/spaces/GST/pages/513605677/Humanta+AI">전체 분석 문서 보기</a></p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-h">
+        <span class="ce">Case 02 · 우리가 받은 이메일 시퀀스</span>
+        <span class="ct">Skyflow</span>
+        <span class="cm">미국 데이터 프라이버시 · 2026-06-30 ~ 07-15 · 2.5주간 16통</span>
+      </div>
+      <div class="case-b">
+        <h4>무슨 일이 있었나</h4>
+        <p>우리가 데모를 신청하자 담당자 두 명이 2.5주 동안 16통을 보냈습니다. 우리가 <strong>미팅을 명시적으로 거절</strong>하자 그날 안에 self-serve 트라이얼로 갈아탔고, 24시간 만에 계정을 열어 줬습니다.</p>
+        <div class="quote">"Apologies, it was in the best intent to get the discussion going… We now understand you'd like to explore the product first. So, we will set you up with a self serve demo… Which one would you prefer?"
+          <span class="who">우리 거절 4시간 뒤. 사과 → 의도 재해석 → 대체안 두 개 → 선택권이 한 통에 들어 있습니다</span></div>
+        <div class="quote">"Hi {First Name}, Following up on my last note…"
+          <span class="who">7월 6일 발송. 대괄호가 치환되지 않은 채로 왔습니다</span></div>
+        <h4>가져온 것</h4>
+        <ul class="took">
+          <li><span>거절당했을 때 다섯 단계로 대응한다. 인정 → 의도 재해석 → 대체안 → 선택권 → 24시간 안에 실행</span><span class="to">→ 답장 유형 3</span></li>
+          <li><span>미팅을 거절당한 자리에서 던질 카드가 준비돼 있어야 한다</span><span class="to">→ 모든 문안의 "다음 행동"</span></li>
+          <li><span>대괄호 미치환 한 통이 앞의 여섯 통을 전부 자동 발송으로 만든다</span><span class="to">→ 결과 카드의 "바꿔야 하는 자리"</span></li>
+        </ul>
+        <p style="margin-top:18px"><a href="https://cubig.atlassian.net/wiki/spaces/LC1/pages/461406458/Skyflow">전체 관찰 리포트 보기</a></p>
+        <div class="note warn" style="max-width:none">
+          <span class="h">따라 하지 않기로 한 것</span>
+          <p>Skyflow는 2.5주 동안 <b>16통</b>을 보냈고, 답이 없자 <b>링크드인으로 우리 대표에게 따로</b> 연락했습니다. 받는 쪽에서는 부담이었고 우리가 그 자리에서 문제를 제기했습니다. <b>우리가 세 번으로 제한한 이유가 이 케이스입니다.</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-h">
+        <span class="ce">Case 03 · 세일즈 웨비나</span>
+        <span class="ct">리드 발굴부터 계약까지, 맥락을 읽는 기술</span>
+        <span class="cm">B2B 세일즈 웨비나 · 2026-08-11</span>
+      </div>
+      <div class="case-b">
+        <h4>가져온 것</h4>
+        <p>문안의 <strong>구조</strong>가 대부분 여기서 왔습니다. 위 두 케이스가 "무엇을 말할까"라면 여기는 "어떤 순서로 말할까"입니다.</p>
+        <ul class="took">
+          <li><span>커넥션 메모 세 문장 구조. ① 왜 당신을 찾았는지 ② 문제 가설 ③ 미팅이 아니라 자료</span><span class="to">→ 모든 커넥션 메모</span></li>
+          <li><span>콜드메일 다섯 문단 구조. 인정 → 문제 → 유사 사례 → 낮은 문턱 → 제안</span><span class="to">→ 모든 콜드메일</span></li>
+          <li><span>연결 수락 직후 제안하면 잡상인이 된다. 2주 동안 댓글로 얼굴을 익힌다</span><span class="to">→ 01 보내기 전에</span></li>
+          <li><span>마지막 정리 메일의 회신율이 가장 높다. 사람은 문이 닫힐 때 반응한다</span><span class="to">→ 05 세 번째 메시지</span></li>
+        </ul>
+        <p style="margin-top:18px"><a href="https://cubig.atlassian.net/wiki/spaces/GST/pages/500203526/2026.08.11+B2B">전체 정리 문서 보기</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">앞으로</span>
+    <h2>새 케이스가 생기면</h2>
+    <p class="lead">아웃바운드를 받거나 웨비나에 다녀오면 여기에 추가합니다. 네 가지만 남기면 됩니다.</p>
+    <ol>
+      <li><strong>받은 원문을 그대로 붙여둡니다.</strong> 번역하거나 요약하지 않습니다.</li>
+      <li><strong>시간순으로 몇 통, 언제 왔는지 적습니다.</strong> 리듬이 보여야 우리 것에 반영할 수 있습니다.</li>
+      <li><strong>우리가 무엇을 했을 때 무엇이 왔는지 적습니다.</strong> 가장 값진 부분입니다. Skyflow에서 제일 쓸모 있었던 게 우리 거절 뒤에 온 한 통이었습니다.</li>
+      <li><strong>가져올 것을 한두 개만 고릅니다.</strong> 전부 가져오려 하면 아무것도 안 바뀝니다.</li>
+    </ol>
+
+    <h3>업데이트 기록</h3>
+    <div class="wrap-scroll">
+      <table class="spec">
+        <thead><tr><th>날짜</th><th>내용</th><th>담당</th></tr></thead>
+        <tbody>
+          <tr><td class="m nowrap">2026-09-04</td>
+              <td>최초 작성. Humanta AI·Skyflow 수신 케이스와 B2B 세일즈 웨비나를 문안으로 정리. 첫 메시지와 팔로업을 선택형으로 구성. Skyflow 케이스를 근거로 팔로업을 5회 18일에서 <strong>3회 10일</strong>로 줄임</td>
+              <td class="m nowrap">하수경</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="nextstep">
+      <span class="nl">다음</span>
+      <button class="btn-next" type="button" data-goto="start">← 시작하기로 돌아가기</button>
+    </div>
+  </section>
+</div>
+
+<footer class="foot">
+  <div class="foot-links">
+    <button type="button" data-goto="lib">쓰면 안 되는 말 전체 목록</button>
+    <button type="button" data-goto="lib">이 문안들이 어디서 나왔는지</button>
+    <button type="button" data-goto="lib">내부 용어 → 고객 표현 대응표</button>
+  </div>
+  <div class="foot-meta">
+    리드 발굴·발송 자동화 · <a href="https://cubig.atlassian.net/wiki/spaces/TPT/pages/455180405/Apollo">Apollo 아웃바운드 실행 매뉴얼</a> (국내사업팀)<br>
+    디자인 · <b>CUBIG Home Design System</b> (assets/css/variables.css 스냅샷 2026-07-08)
+  </div>
+</footer>
+
+</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var GUARD_ALL = [
+  ['security · protect your data', 'make the data usable for the task and model'],
+  ['승인 안 된 성과 수치', '방식으로 설명하거나, 고객 데이터에서 나온 점수를 씁니다'],
+  ['GDPR · EU AI Act 언급', '법무 검토 전에는 쓰지 않습니다'],
+  ['지킬 수 없는 소개 제안', '실제로 연결해 줄 수 있는 사람만 씁니다']
+];
+var GUARDS = {
+  syn: GUARD_ALL.concat([
+    ['replaces your data platform', 'works alongside existing data stacks'],
+    ['Release State · Run Binding · Diff', '이 문안에는 이미 풀어 썼습니다. 되돌리지 마세요']
+  ]),
+  dts: GUARD_ALL.concat([
+    ['synthetic generator · fake data · 비식별화', 'AI-ready data transformation engine'],
+    ['PII masking · tokenization', 'structure-preserving substitution'],
+    ['differential privacy · noise · ε', '고객에게 보내는 글에는 아예 쓰지 않습니다'],
+    ['"데이터를 만들어 드립니다"', '"바꾼 다음 원본과 비교한다" 순서를 반드시 씁니다']
+  ]),
+  cap: GUARD_ALL.concat([
+    ['AI gateway · guardrail · AI security suite', 'a working version, restored to business values'],
+    ['zero exposure · "아무것도 안 나갑니다"', '"구성에 따라 다르니 케이스별로 보자"고 씁니다'],
+    ['PII masking · tokenization', 'structure-preserving substitution']
+  ])
+};
+
+var ROUTES = {
+  'syn-a': {fam:'syn', pill:'Syntitan', name:'배포 전', line:'승인 기준을 통과하는지 배포 전에 확인하자는 이야기입니다.'},
+  'syn-b': {fam:'syn', pill:'Syntitan', name:'성능 미달', line:'모델을 바꾸기 전에 데이터부터 확인하자는 이야기입니다.'},
+  'syn-c': {fam:'syn', pill:'Syntitan', name:'운영 중', line:'결과가 왜 달라졌는지 설명할 고정점을 만들자는 이야기입니다.'},
+  'dts':   {fam:'dts', pill:'DTS', name:'학습 데이터', line:'이미 가진 데이터를 학습에 쓸 형태로 바꾸자는 이야기입니다.'},
+  'cap':   {fam:'cap', pill:'LLM Capsule', name:'워크플로우 중단', line:'작업본으로 돌리고 결과를 업무 값으로 되돌리자는 이야기입니다.'}
+};
+
+var F_NAME = ['[name]', '상대 이름만. 성은 빼고 부르는 이름만 씁니다 (Priya ○ / Priya Raghavan ✕)'];
+var F_ME   = ['[내 이름]', '본인 영문 이름. 회사 계정이 아니라 본인 계정으로 보냅니다'];
+var F_COLL = ['[colleague]', '실제로 연결해 줄 수 있는 사람의 이름과 역할. 예: Wonjun, who works on the data checks. 연결해 줄 사람이 없으면 그 문장을 통째로 빼세요'];
+
+var M = {};
+
+M['syn-a|note'] = {title:'링크드인 커넥션 메모', limit:300,
+  body:"Hi [name],\n\nSaw your team is hiring for the [ML platform] roles. The line about [reproducible pipelines] is exactly the challenge we work on. Reaching out to share how we check data versions before deployment, so they can be measured against the approval thresholds.\n\nBest,\n[내 이름]",
+  fill:[F_NAME, ['[ML platform]', '실제 채용 중인 포지션 이름 그대로'], ['[reproducible pipelines]', '채용 공고 본문에서 복사한 구절'], F_ME],
+  why:'세 문장 구조입니다. ① 왜 당신을 찾았는지 ② 그게 우리가 매번 보는 지점이라는 연결 ③ 미팅이 아니라 정보 제공. 300자 제한이 있어 더 늘릴 수 없습니다.'};
+M['syn-a|dm'] = {title:'링크드인 DM',
+  body:"Hi [name],\n\nThanks for connecting.\n\nI saw the announcement on [the agent workflow you shipped last month]. Teams at that stage usually have the data cleaned and managed already, but it hasn't yet been checked against the specific task and model going into production.\n\nThe question that tends to surface late is whether the current data clears the approval threshold. We run that comparison before deployment, on the same model and evaluation set, changing only the data.\n\nYou can try it on your own data from our homepage, or I can put you in touch with [colleague], who works on this directly. Whichever is easier — no call needed.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the agent workflow you shipped last month]', '상대가 발표한 제품·기능 이름과 시점'], F_COLL, F_ME],
+  why:'마지막 줄의 "No call needed"가 Rule 01입니다. Humanta가 우리에게 보낸 첫 DM도 미팅을 요구하지 않았고, 그래서 우리가 답장을 했습니다.'};
+M['syn-a|email'] = {title:'콜드메일',
+  body:"Subject: Before [the agent workflow] goes into production\n\nHi [name],\n\nI saw [the announcement on the agent workflow you shipped last month].\n\nMost teams at that point have the data managed, but it hasn't been checked against the specific task and approval threshold it will be measured on. That gap usually shows up at the deployment review rather than before it.\n\nWhat we do is run that check first. We look at the data issues to address, then link the run to the exact data version and settings it used, so the condition behind each result stays identifiable.\n\nYou can log into our homepage and run your existing dataset to see this for yourself — a few minutes, nothing to prepare. Or if you'd rather ask questions than click around, I can introduce you to [colleague], who works on this directly.\n\nEither way, no call needed.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the agent workflow]', '제목에는 짧게. 상대 제품 이름만'], ['[the announcement on the agent workflow you shipped last month]', '본문에는 길게. 어디서 봤는지와 시점까지'], F_COLL, F_ME],
+  why:'다섯 문단이 각각 역할이 있습니다. 인정 → 문제 → 우리 방식 → 낮은 문턱 → 제안. 세 번째 자리는 원래 성과 사례가 들어가는 자리인데, 승인된 수치가 없어 방식 설명으로 채웠습니다.'};
+M['syn-a|follow'] = "Hi [name],\n\nOne thing I should have added.\n\nThe reason we start before deployment is the cost of rework. When data turns out to be the constraint at the approval stage, the team has already spent a cycle on the model.\n\nYou can log in and test your dataset anytime, and the offer to introduce you to [colleague] stands too.\n\nBest,\n[내 이름]";
+M['syn-a|followwhy'] = '같은 문제를 <b>비용</b>으로 바꾼 것이 새 정보입니다. 첫 메시지에서 준 두 가지 선택지를 다시 열어 두되, 재촉하지 않습니다.';
+
+M['syn-b|note'] = {title:'링크드인 커넥션 메모', limit:300,
+  body:"Hi [name],\n\nSaw [the pilot results you published earlier this year]. We help teams at this exact stage find the actual bottleneck. Reaching out to discuss how checking the data first can prevent an expensive model replacement.\n\nBest,\n[내 이름]",
+  fill:[F_NAME, ['[the pilot results you published earlier this year]', '상대가 공개한 파일럿 결과. 발표 제목이나 시점'], F_ME],
+  why:'"expensive model replacement"는 상대가 지금 검토 중일 확률이 높은 선택지입니다. 먼저 이름 붙여 주면 자기 이야기로 읽습니다.'};
+M['syn-b|dm'] = {title:'링크드인 DM',
+  body:"Hi [name],\n\nThanks for connecting.\n\nI saw [the pilot results published earlier this year], and that the rollout is still in progress. At that stage most teams look at changing the model first.\n\nBefore that it's worth checking whether the data is what's limiting the result. We hold the model fixed, change only the data version, and keep the source and processing history behind each run. Sometimes it turns out not to be the data, and that answer is just as useful for the next decision.\n\nHappy to send a short example, or to put you in touch with [colleague], who runs these comparisons. Whichever is easier — no call needed.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the pilot results published earlier this year]', '파일럿 결과 발표 내용과 시점'], F_COLL, F_ME],
+  why:'"Sometimes it turns out not to be the data"가 Rule 03입니다. 좋아진다고 장담하지 않고, 아니라는 답도 쓸모 있다고 씁니다.'};
+M['syn-b|email'] = {title:'콜드메일',
+  body:"Subject: Same model, different data\n\nHi [name],\n\nI saw [the pilot results published earlier this year] and that the move into production is still open.\n\nWhen a pilot clears but operating numbers don't follow, the usual next step is a different model. That's an expensive way to find out where the constraint actually is.\n\nWe hold the model fixed, change only the data, and compare the two data versions to show exactly which gaps moved the numbers. If they don't move, that's evidence the constraint sits somewhere other than the data.\n\nBefore the next purchase, you can log into our homepage and run your existing dataset to identify the actual constraint. Or I can introduce you to [colleague], who has run this comparison with a few teams, if that's a faster route to the answer.\n\nNo call needed either way.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the pilot results published earlier this year]', '파일럿 결과 발표 내용과 시점'], F_COLL, F_ME],
+  why:'제목이 그대로 우리 방법입니다. 제목만 읽고도 무슨 이야기인지 알 수 있어야 열립니다.'};
+M['syn-b|follow'] = "Hi [name],\n\nAdding one thing that usually matters more than the metric itself.\n\nTeams in this position often run a second pilot. That's another quarter and another budget line, with the same open question at the end of it.\n\nRunning your dataset through our platform closes that question beforehand.\n\nBest,\n[내 이름]";
+M['syn-b|followwhy'] = '두 번째 파일럿의 비용은 상대가 이미 아는 숫자입니다. 우리가 계산해서 들이미는 숫자보다 상대가 스스로 떠올린 숫자가 사내 결재에서 강하게 작동합니다.';
+
+M['syn-c|note'] = {title:'링크드인 커넥션 메모', limit:300,
+  body:"Hi [name],\n\nYour post on [getting a different answer from the same analysis] is something we run into most weeks. We look at it from the data side rather than the model. Reaching out to share how saving the data state helps you explain why a result changed.\n\nBest,\n[내 이름]",
+  fill:[F_NAME, ['[getting a different answer from the same analysis]', '상대 게시물의 내용을 그 사람 표현대로'], F_ME],
+  why:'상대가 이미 공개적으로 쓴 문제를 그대로 인용합니다. 트리거 확인이 가장 쉽고 답장률도 가장 높습니다.'};
+M['syn-c|dm'] = {title:'링크드인 DM',
+  body:"Hi [name],\n\nThanks for connecting.\n\nYour post on [the same analysis returning a different answer] is something we run into most weeks. The hard part is usually not the run itself, it's explaining the difference afterwards.\n\nWe save the data state a run used and link the run to it, so the earlier state can be restored and the two versions compared side by side.\n\nHappy to share a short write-up on how that's structured, or to put you in touch with [colleague], who works on this directly. Whichever is more useful — no call needed.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the same analysis returning a different answer]', '상대 게시물의 내용을 그 사람 표현대로'], F_COLL, F_ME],
+  why:'"if it\'s relevant to what you\'re working on"이 거절 비용을 없앱니다. 아니라고 답하기 쉬운 문장을 두면 맞다는 답도 더 자주 옵니다.'};
+M['syn-c|email'] = {title:'콜드메일',
+  body:"Subject: Explaining why the result changed\n\nHi [name],\n\n[Your post on the same analysis returning a different answer] is a problem we see most weeks.\n\nThe run is rarely the difficult part. Reconstructing the conditions afterwards is, because the data has usually moved since and there's no fixed point to compare against.\n\nWe save the data state, link each run to the version it used, and show the exact difference between versions with a change record. When a result is questioned later, the answer comes from a saved record rather than a reconstruction.\n\nYou can log into our homepage and run your existing dataset to see this firsthand. Or if you'd rather talk it through than click around, I can introduce you to [colleague], who works on this directly.\n\nNo call needed either way.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[Your post on the same analysis returning a different answer]', '상대 게시물이나 발표 내용. 인수합병 건이면 "the integration you announced" 같은 식으로'], F_COLL, F_ME],
+  why:'"no fixed point to compare against"가 우리가 파는 것의 정의입니다. 제품명 없이 문제의 구조만으로 설명됩니다.'};
+M['syn-c|follow'] = "Hi [name],\n\nSending this along regardless of whether it's the right time.\n\nOur platform keeps these records automatically, and you can test it anytime with your own data.\n\nNo reply needed.\n\nBest,\n[내 이름]";
+M['syn-c|followwhy'] = '"No reply needed"는 정말로 답을 요구하지 않는다는 뜻입니다. 이렇게 써 놓고 다시 재촉하면 그 이후 어떤 메일도 신뢰를 얻지 못합니다.';
+
+M['dts|note'] = {title:'링크드인 커넥션 메모', limit:300,
+  body:"Hi [name],\n\nSaw [the data partnership you announced]. Teams usually look outside when the data they already hold can't be used for training in the form it's in. That's the part we work on. Happy to connect.\n\nBest,\n[내 이름]",
+  fill:[F_NAME, ['[the data partnership you announced]', '외부 데이터 조달·라이선스 발표 내용'], F_ME],
+  why:'상대의 결정(외부에서 사 오기)이 틀렸다고 하지 않습니다. 그 결정에 이르게 된 <b>원인</b>을 한 문장으로 되짚어 주면 자기 이야기로 읽습니다.'};
+M['dts|dm'] = {title:'링크드인 DM',
+  body:"Hi [name],\n\nThanks for connecting.\n\nI saw [the data sourcing announcement]. In most cases the blocker isn't volume. The data exists, it just can't go into training in the form it's in: classes with too few records, rare cases the model never sees, records that can't leave the environment they sit in.\n\nWe reshape that data so it can be used for training, testing and evaluation, then compare the result back against the original on distribution, column relationships and rare patterns, so you can see what held and what changed.\n\nHappy to share what that comparison looks like on a sample, or to put you in touch with [colleague], who runs them. Whichever is easier — no call needed.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the data sourcing announcement]', '외부 데이터 조달 발표 내용'], F_COLL, F_ME],
+  why:'막히는 이유 세 가지를 나열해 상대가 자기 것을 고르게 합니다. <b>바꾼 다음 원본과 비교한다</b>는 순서를 반드시 넣습니다. 이 순서가 빠지면 "데이터를 만들어 준다"로 읽혀서 그 자리에서 합성데이터 회사가 됩니다.'};
+M['dts|email'] = {title:'콜드메일',
+  body:"Subject: The training data you already have\n\nHi [name],\n\nI saw [the data sourcing partnership you announced last month].\n\nMost teams at that point already hold the data they need. What blocks it is the form it's in. Classes with too few records, rare cases the model never sees, and records that can't leave the environment they sit in.\n\nWe reshape that data into a form you can train, test and evaluate on, and then compare it back against the original on distribution, column relationships and rare patterns, so it's clear what held and what changed. If the important relationships don't survive the change, that shows up in the comparison rather than in the model six weeks later.\n\nYou can run one of your own tables through it from our homepage and look at that comparison before deciding anything. Or I can introduce you to [colleague], who has run this on datasets with the same shape.\n\nNo call needed either way.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[the data sourcing partnership you announced last month]', '외부 데이터 조달 발표 내용과 시점'], F_COLL, F_ME],
+  why:'제목이 반론을 먼저 처리합니다. "이미 가진 학습 데이터"라는 말 자체가 밖에서 사는 것보다 싼 선택지가 있다는 뜻이라 열어볼 이유가 됩니다.'};
+M['dts|follow'] = "Hi [name],\n\nOne thing worth adding.\n\nThe reason we compare back against the original is that reshaped data is only useful if the relationships you actually model on survive it. That comparison is the step most teams skip, and it's the step that decides whether the data is worth training on at all.\n\nThe sample run stands whenever you want it.\n\nBest,\n[내 이름]";
+M['dts|followwhy'] = '새 정보는 <b>검증 단계가 있다는 사실</b>입니다. 이 분야에서 가장 흔한 실패가 바꾼 데이터를 검증 없이 학습에 넣는 것입니다.';
+
+M['cap|note'] = {title:'링크드인 커넥션 메모', limit:300,
+  body:"Hi [name],\n\nSaw [the on-prem requirement in your posting]. Most teams in that position stop the AI workflow rather than move the data. We work on the third option, running the step on a working version and restoring the results. Happy to connect.\n\nBest,\n[내 이름]",
+  fill:[F_NAME, ['[the on-prem requirement in your posting]', '채용 공고나 RFP의 on-prem·데이터 소재지 조건'], F_ME],
+  why:'"the third option"이 핵심입니다. 상대는 두 가지 선택지 안에서만 생각하고 있을 확률이 높아서, 세 번째가 있다는 말 자체가 문을 엽니다.'};
+M['cap|dm'] = {title:'링크드인 DM',
+  body:"Hi [name],\n\nThanks for connecting.\n\nI saw [that data residency is a stated requirement on your side]. That usually leaves two options: keep the workflow inside a smaller model you host, or stop the workflow at the point the data would have to move.\n\nThere's a third. The step runs on a working version where the sensitive values are substituted with stand-ins that keep the same structure, and the results come back restored to the business values on your side.\n\nWhere each piece sits depends on how it's set up, so it's worth going through your case rather than assuming. I can put you in touch with [colleague], who can answer that precisely, or send you a written walkthrough instead. Whichever you prefer.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[that data residency is a stated requirement on your side]', '어디서 그 조건을 봤는지'], F_COLL, F_ME],
+  why:'마지막 문단이 과장 방지 장치입니다. 첫 메시지에서 포괄적으로 약속하면 다음 질문에 답할 수 없고, 답 못 하는 순간 신뢰가 끝납니다.'};
+M['cap|email'] = {title:'콜드메일',
+  body:"Subject: The step where the AI workflow stops\n\nHi [name],\n\nI saw [data residency listed as a requirement in your recent posting].\n\nIn teams with that constraint the AI workflow usually doesn't fail, it stops. It runs up to the point where the data would have to leave, and everything after that goes back to being manual. The cost sits in the manual half, not in the tool.\n\nWhat we do is run that step on a working version, where the sensitive values are substituted with stand-ins that keep the same structure, and then restore the results to the business values inside your environment.\n\nWhere the originals and the mapping sit, and what leaves at all, depends on the configuration. That's worth walking through against your actual constraint rather than in the abstract. I can introduce you to [colleague], who can answer that precisely, or put it in writing if that's easier.\n\nWhichever you prefer — no call needed.\n\nBest,\n[내 이름]",
+  dual:true,
+  fill:[F_NAME, ['[data residency listed as a requirement in your recent posting]', '채용 공고·RFP의 해당 문장을 그대로. 따옴표째 인용하면 더 좋습니다'], F_COLL, F_ME],
+  why:'"doesn\'t fail, it stops"가 상대가 사내에서 설명하기 어려워하던 상태에 이름을 붙여 줍니다. 비용이 도구가 아니라 <b>손으로 돌아간 절반</b>에 있다고 짚으면 예산 근거가 생깁니다.'};
+M['cap|follow'] = "Hi [name],\n\nAdding the question that usually comes next.\n\nTeams ask what happens to the mapping between the working version and the real values, since that's the part that decides whether the restore is something you control or something we do. It stays on your side.\n\nHappy to go through the setup whenever it's useful.\n\nBest,\n[내 이름]";
+M['cap|followwhy'] = '상대가 물어볼 질문을 우리가 먼저 꺼냅니다. 우리가 먼저 꺼내면 숨길 게 없는 쪽으로 읽히고, 상대가 먼저 꺼내면 방어하는 쪽으로 읽힙니다.';
+
+var CLOSING = "Sounds like this isn't the priority right now, so I'll close it out on my side.\n\nIf that changes, just reply to this and we'll pick it up.";
+
+function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+function card(cls, label, title, inner){
+  return '<div class="result ' + cls + '"><div class="res-h"><span class="rl">' + label + '</span>' +
+    '<span class="rt">' + title + '</span></div><div class="res-sec">' + inner + '</div></div>';
+}
+function msgCard(msg, meta, extra){
+  var n = msg.body.length, over = msg.limit && n > msg.limit;
+  var h = '<div class="result"><div class="res-h"><span class="rl">보낼 메시지</span>' +
+    '<span class="rt">' + esc(msg.title) + '</span>';
+  if(meta) h += '<span class="pill">' + esc(meta.pill) + ' · ' + esc(meta.name) + '</span>';
+  if(msg.limit) h += '<span class="count' + (over ? ' over' : '') + '">' + n + ' / ' + msg.limit + '</span>';
+  h += '<button class="copy" type="button" data-copytarget="' + msg.id + '">복사</button></div>';
+  h += '<div class="res-body"><pre id="' + msg.id + '">' + esc(msg.body) + '</pre></div>';
+  h += '<div class="res-sec why"><span class="sh">왜 이렇게 쓰나</span><p>' + msg.why + (meta ? ' ' + esc(meta.line) : '') + '</p></div>';
+  if(msg.fill && msg.fill.length){
+    h += '<div class="res-sec"><span class="sh">바꿔야 하는 자리 ' + msg.fill.length + '개</span><ul class="fill">';
+    msg.fill.forEach(function(f){ h += '<li><span class="tok">' + esc(f[0]) + '</span><span>' + f[1] + '</span></li>'; });
+    h += '</ul></div>';
+  }
+  if(msg.dual){
+    h += '<div class="res-sec why"><span class="sh">왜 두 가지를 나란히 두나</span><p>' +
+      '미팅을 요청하는 대신 <b>직접 해보기</b>와 <b>사람 소개</b>를 나란히 둡니다. 둘 다 거절하기 쉬운 제안이라 답장 부담이 없고, ' +
+      '두 개를 주면 하나라도 고를 확률이 올라갑니다. 우리가 받아 본 두 케이스가 정확히 이 구조였습니다 — ' +
+      'Humanta는 첫 DM에서 "관심 있는지"와 "담당자를 알려달라"를 나란히 뒀고, Skyflow는 우리 미팅 거절에 트라이얼 두 트랙을 주고 ' +
+      '"Which one would you prefer?"로 끝냈습니다. 소개는 <b>실제로 연결해 줄 수 있는 사람</b>일 때만 씁니다.' +
+      '</p></div>';
+  }
+  if(meta){
+    h += '<div class="res-sec stop"><span class="sh">이 메시지에서 쓰면 안 되는 말</span><ul class="guards">';
+    GUARDS[meta.fam].forEach(function(g){
+      h += '<li><span class="x">✕ ' + esc(g[0]) + '</span><span class="o">○ ' + esc(g[1]) + '</span></li>';
+    });
+    h += '</ul></div>';
+  }
+  if(extra) h += extra;
+  return h + '</div>';
+}
+
+/* ───────── wizard 1 : 첫 메시지 ───────── */
+var S1 = {trigger:null, channel:null, stage:null, situation:null, deployed:null};
+var w1 = document.getElementById('wiz1'), r1 = document.getElementById('result1'), c1 = document.getElementById('crumbs1');
+var L1 = {
+  trigger:{yes:'트리거 확인됨', no:'트리거 없음'},
+  channel:{li:'링크드인', email:'이메일'},
+  stage:{none:'준비 전', note:'연결 요청 단계', dm:'연결 수락됨'},
+  situation:{s1:'운영 전환 막힘', s2:'결과가 달라짐', s3:'학습 데이터 부족', s4:'데이터 못 옮김', s5:'데이터 기준 흔들림'},
+  deployed:{pre:'배포 전', post:'배포 후 미달'}
+};
+function route1(){
+  if(S1.situation === 's2' || S1.situation === 's5') return 'syn-c';
+  if(S1.situation === 's3') return 'dts';
+  if(S1.situation === 's4') return 'cap';
+  if(S1.situation === 's1'){
+    if(S1.deployed === 'pre') return 'syn-a';
+    if(S1.deployed === 'post') return 'syn-b';
+  }
+  return null;
+}
+function render1(){
+  function set(q, on){ var el = w1.querySelector('[data-q="'+q+'"]'); if(el) el.hidden = !on; }
+  set('trigger', true);
+  set('channel', S1.trigger === 'yes');
+  set('stage', S1.trigger === 'yes' && S1.channel === 'li');
+  var ok = (S1.channel === 'email') || (S1.channel === 'li' && (S1.stage === 'note' || S1.stage === 'dm'));
+  set('situation', S1.trigger === 'yes' && ok);
+  set('deployed', S1.trigger === 'yes' && ok && S1.situation === 's1');
+  w1.querySelectorAll('.q').forEach(function(q){
+    var k = q.getAttribute('data-q');
+    q.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed', String(S1[k] === b.getAttribute('data-v'))); });
+  });
+  var parts = [];
+  ['trigger','channel','stage','situation','deployed'].forEach(function(k){ if(S1[k] && L1[k][S1[k]]) parts.push(L1[k][S1[k]]); });
+  c1.innerHTML = parts.length ? '고른 것 · <b>' + parts.join('</b> › <b>') + '</b>' : '위에서 골라주세요';
+
+  if(S1.trigger === 'no'){
+    r1.innerHTML = card('blocked', '보내지 않습니다', '먼저 연락할 이유부터 찾으세요',
+      '<p style="margin-bottom:12px">근거 없는 첫 문장은 사내에서 전달되지 않습니다. 아래 중 하나를 <b>원문 링크와 함께</b> 확보한 다음 다시 오세요.</p>' +
+      '<ul style="margin:0"><li>상대가 최근 90일 안에 쓴 링크드인 글</li><li>회사 제품 블로그의 새 기능·에이전트 출시</li>' +
+      '<li>채용 공고 본문</li><li>보도자료, 실적 발표, 컨퍼런스 발표 자료</li><li>인사 발령 — 프로필의 시작 월로 확인합니다</li></ul>' +
+      '<p style="margin:12px 0 0"><b>요약하지 말고 문장을 그대로 복사해 두세요.</b> 그 문장이 첫 줄에 그대로 들어갑니다.</p>');
+    return;
+  }
+  if(S1.trigger === 'yes' && S1.channel === 'li' && S1.stage === 'none'){
+    r1.innerHTML = card('calm', '아직 이릅니다', '댓글 두 번이 먼저입니다',
+      '<p style="margin-bottom:12px">연결 요청을 수락받자마자 제안을 보내면 잡상인으로 읽힙니다. 최소 <b>6일차까지</b>, 댓글 두 번을 단 다음에 연결 요청을 보냅니다.</p>' +
+      '<p style="margin:0 0 12px">오늘 할 일은 프로필을 열고 최근 글에 좋아요를 하나 누르는 것입니다. 3분이면 됩니다.</p>' +
+      '<p style="margin:0"><a href="#" data-goto="before">01 보내기 전에 · 14일 표 보기 →</a> &nbsp;·&nbsp; <a href="#" data-goto="comment">02 댓글 쓰는 법 →</a></p>');
+    return;
+  }
+  var r = route1();
+  var ck = S1.channel === 'email' ? 'email' : (S1.channel === 'li' ? S1.stage : null);
+  if(!r || !ck || !M[r + '|' + ck]){ r1.innerHTML = ''; return; }
+  var msg = M[r + '|' + ck];
+  msg.id = 'm1body';
+  var extra = '<div class="res-sec"><span class="sh">다음</span><p>' +
+    (ck === 'email'
+      ? '답이 없으면 <b>4일 뒤</b>에 두 번째를 보냅니다. <a href="#" data-goto="nore">05 답이 없으면</a>에서 문안이 나옵니다.'
+      : ck === 'note'
+        ? '연결 요청을 보낸 뒤에도 댓글은 계속 답니다 (10·12일차). 수락되면 여기로 돌아와 Q3를 <b>연결이 수락됐습니다</b>로 바꾸세요.'
+        : '답장이 오면 <a href="#" data-goto="reply">04 답장이 오면</a>에서 고릅니다. 답이 없으면 <a href="#" data-goto="nore">05 답이 없으면</a>으로 갑니다.') +
+    '</p></div>';
+  r1.innerHTML = msgCard(msg, ROUTES[r], extra);
+}
+
+/* ───────── wizard 2 : 답이 없으면 ───────── */
+var S2 = {sent:null, days:null, route:null};
+var w2 = document.getElementById('wiz2'), r2 = document.getElementById('result2'), c2 = document.getElementById('crumbs2');
+var L2 = {
+  sent:{'1':'한 번 보냄', '2':'두 번 보냄', '3':'세 번 보냄'},
+  days:{d3:'3일 이하', d5:'4~5일', d6:'6일 이상'},
+  route:{'syn-a':'배포 전 점검', 'syn-b':'모델 말고 데이터', 'syn-c':'결과 설명', 'dts':'학습 데이터', 'cap':'멈춘 작업'}
+};
+function verdict2(){
+  if(S2.sent === '3') return 'done';
+  if(!S2.days) return null;
+  if(S2.sent === '1'){
+    if(S2.days === 'd3') return 'wait1';
+    return 'follow';
+  }
+  if(S2.sent === '2'){
+    if(S2.days === 'd6') return 'close';
+    return 'wait2';
+  }
+  return null;
+}
+function render2(){
+  function set(q, on){ var el = w2.querySelector('[data-q="'+q+'"]'); if(el) el.hidden = !on; }
+  set('sent', true);
+  set('days', S2.sent === '1' || S2.sent === '2');
+  var v = verdict2();
+  set('route', v === 'follow');
+  w2.querySelectorAll('.q').forEach(function(q){
+    var k = q.getAttribute('data-q');
+    q.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed', String(S2[k] === b.getAttribute('data-v'))); });
+  });
+  var parts = [];
+  ['sent','days','route'].forEach(function(k){ if(S2[k] && L2[k][S2[k]]) parts.push(L2[k][S2[k]]); });
+  c2.innerHTML = parts.length ? '고른 것 · <b>' + parts.join('</b> › <b>') + '</b>' : '위에서 골라주세요';
+
+  if(v === 'done'){
+    r2.innerHTML = card('blocked', '여기서 끝', '더 보내지 않습니다',
+      '<p style="margin-bottom:12px">세 번까지가 전부입니다. 네 번째 메시지가 하는 일은 <b>다음에 다시 연락할 기회를 없애는 것</b>뿐입니다.</p>' +
+      '<p style="margin:0 0 12px">닫는 메일에서 "상황이 바뀌면 알려달라"고 이미 말했으니, 그 약속을 지킵니다. 실제로 닫아 두면 몇 달 뒤 상대가 먼저 답장하는 경우가 있습니다. 재촉하면 그 가능성이 사라집니다.</p>' +
+      '<p style="margin:0">이 사람과 나눈 대화 맥락과 닫힌 이유는 어딘가에 남겨두세요. 다음에 다시 붙을 때 첫 문장의 재료가 됩니다.</p>');
+    return;
+  }
+  if(v === 'wait1'){
+    r2.innerHTML = card('calm', '아직 이릅니다', '4일차까지 기다립니다',
+      '<p style="margin:0">첫 메시지를 보낸 지 사흘도 안 됐습니다. 상대가 아직 안 열어봤거나, 열어보고 나중에 답하려고 미뤄둔 상태입니다. ' +
+      '<b>4일차에 다시 오세요.</b> 그때 두 번째 문안이 나옵니다.</p>');
+    return;
+  }
+  if(v === 'wait2'){
+    r2.innerHTML = card('calm', '아직 이릅니다', '마지막 메시지까지 며칠 더',
+      '<p style="margin:0">두 번째를 보낸 지 얼마 안 됐습니다. 마지막 메시지는 첫 메시지로부터 <b>열흘쯤</b> 지났을 때 보냅니다. ' +
+      '두 번째를 보낸 지 <b>6일이 지나면</b> 다시 오세요.</p>');
+    return;
+  }
+  if(v === 'follow'){
+    if(!S2.route){ r2.innerHTML = ''; return; }
+    var msg = {
+      id:'m2body', title:'두 번째 메시지 · 다른 각도',
+      body:M[S2.route + '|follow'],
+      why:M[S2.route + '|followwhy'] + ' 같은 스레드에 답장으로 붙입니다.',
+      fill:[F_NAME, F_ME]
+    };
+    var extra = '<div class="res-sec stop"><span class="sh">이 메시지에서 하면 안 되는 것</span><ul class="guards">' +
+      '<li><span class="x">✕ "확인하셨을까요?"</span><span class="o">○ 새 정보를 하나 얹습니다</span></li>' +
+      '<li><span class="x">✕ "위 메일 참고 부탁드립니다"</span><span class="o">○ 앞 메일을 요약해 반복하지 않습니다</span></li>' +
+      '<li><span class="x">✕ 다른 채널로 동시에 보내기</span><span class="o">○ 같은 스레드에만 붙입니다</span></li>' +
+      '</ul></div>' +
+      '<div class="res-sec"><span class="sh">다음</span><p>이것도 답이 없으면 <b>첫 메시지로부터 열흘째</b>에 마지막 메시지를 보냅니다. 그게 끝입니다.</p></div>';
+    r2.innerHTML = msgCard(msg, ROUTES[S2.route], extra);
+    return;
+  }
+  if(v === 'close'){
+    var cmsg = {
+      id:'m2body', title:'세 번째 메시지 · 닫기',
+      body:CLOSING,
+      why:'셋 중 <b>회신율이 가장 높습니다.</b> 결정을 요구하지 않고 관계 종료를 알리는 형식이라 답장하는 부담이 가장 적습니다. 답 안 해도 되는 메일이라 오히려 답이 옵니다.',
+      fill:[]
+    };
+    var extra2 = '<div class="res-sec stop"><span class="sh">조건이 하나</span>' +
+      '<p>말한 대로 <b>실제로 닫아야 합니다.</b> 닫는다고 해놓고 2주 뒤에 다시 연락하면 그 다음부터 어떤 메일도 신뢰를 얻지 못합니다. 이름을 넣지 않고 이 두 줄만 보내도 됩니다.</p></div>' +
+      '<div class="res-sec"><span class="sh">보낸 다음</span><p>이 사람은 여기서 끝입니다. 대화 맥락과 닫힌 이유를 남겨두고, 상황이 바뀌었다는 소식이 들리면 그때 다시 붙습니다.</p></div>';
+    r2.innerHTML = msgCard(cmsg, null, extra2);
+    return;
+  }
+  r2.innerHTML = '';
+}
+
+/* ───────── 이벤트 ───────── */
+w1.addEventListener('click', function(e){
+  var b = e.target.closest('.opt'); if(!b) return;
+  var q = b.closest('.q').getAttribute('data-q'), v = b.getAttribute('data-v');
+  S1[q] = (S1[q] === v) ? null : v;
+  if(q === 'trigger' && S1.trigger !== 'yes'){ S1.channel = S1.stage = S1.situation = S1.deployed = null; }
+  if(q === 'channel'){ S1.stage = null; }
+  if(q === 'situation' && v !== 's1'){ S1.deployed = null; }
+  render1();
+});
+w2.addEventListener('click', function(e){
+  var b = e.target.closest('.opt'); if(!b) return;
+  var q = b.closest('.q').getAttribute('data-q'), v = b.getAttribute('data-v');
+  S2[q] = (S2[q] === v) ? null : v;
+  if(q === 'sent'){ S2.days = null; S2.route = null; }
+  if(q === 'days'){ S2.route = null; }
+  render2();
+});
+document.addEventListener('click', function(e){
+  var rb = e.target.closest('[data-reset]'); if(!rb) return;
+  if(rb.getAttribute('data-reset') === '1'){ S1 = {trigger:null, channel:null, stage:null, situation:null, deployed:null}; render1(); }
+  else { S2 = {sent:null, days:null, route:null}; render2(); }
+});
+
+S1.trigger = 'yes'; S1.channel = 'email'; S1.situation = 's1'; S1.deployed = 'pre';
+render1();
+S2.sent = '1'; S2.days = 'd5'; S2.route = 'syn-a';
+render2();
+
+/* 복사 */
+document.addEventListener('click', function(e){
+  var btn = e.target.closest('.copy'); if(!btn) return;
+  var t = btn.getAttribute('data-copytarget');
+  var pre = t ? document.getElementById(t) : (btn.closest('.tmpl') && btn.closest('.tmpl').querySelector('pre'));
+  if(!pre) return;
+  var text = pre.textContent;
+  function done(){ btn.textContent = '복사됨'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent = '복사'; btn.classList.remove('done'); }, 1600); }
+  function fb(){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(err){ btn.textContent='직접 선택'; }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, fb); } else { fb(); }
+});
+
+/* 탭 */
+var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbar [role="tab"]'));
+function selectTab(tab){
+  tabs.forEach(function(t){
+    var on = (t === tab);
+    t.setAttribute('aria-selected', String(on));
+    var panel = document.getElementById(t.getAttribute('aria-controls'));
+    if(panel) panel.hidden = !on;
+  });
+}
+tabs.forEach(function(t, i){
+  t.addEventListener('click', function(){ selectTab(t); });
+  t.addEventListener('keydown', function(e){
+    var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if(!d) return;
+    e.preventDefault();
+    var next = tabs[(i + d + tabs.length) % tabs.length];
+    next.focus(); selectTab(next);
+  });
+});
+document.addEventListener('click', function(e){
+  var a = e.target.closest('[data-goto]'); if(!a) return;
+  e.preventDefault();
+  var tab = document.getElementById('tab-' + a.getAttribute('data-goto'));
+  if(tab){ selectTab(tab); window.scrollTo({top:0, behavior:'smooth'}); }
+});
+})();
+</script>
